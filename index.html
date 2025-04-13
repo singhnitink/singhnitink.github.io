@@ -1,1 +1,276 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nitin Kumar Singh - Portfolio</title> <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .active-tab {
+            /* Highlight active tab with a border */
+            border-bottom: 2px solid #3b82f6; /* Tailwind blue-500 */
+            color: #ffffff; /* White text for active tab */
+        }
+        .tab-link {
+             /* Add padding for better click area */
+            padding-bottom: 0.5rem; /* pb-2 */
+        }
+        .tab-content {
+            /* Smooth transition for content visibility */
+            transition: opacity 0.5s ease-in-out;
+        }
+        .hidden {
+            display: none;
+        }
+        /* Add some hover effect to paper entries */
+        .paper-entry:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-white shadow-md py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <h1 class="text-3xl font-bold text-gray-800">Nitin Kumar Singh</h1> <div>
+                <a href="mailto:singh.nitinkumar@yahoo.com" class="text-gray-600 hover:text-blue-600 transition-colors">singh.nitinkumar@yahoo.com</a>
+                 <a href="https://github.com/singhnitink" target="_blank" class="ml-4 text-gray-600 hover:text-blue-600 transition-colors">GitHub</a>
+                 <a href="https://scholar.google.com/citations?user=YOUR_GSCHOLAR_ID" target="_blank" class="ml-4 text-gray-600 hover:text-blue-600 transition-colors">G-Scholar</a> <a href="https://www.linkedin.com/in/nitin-kumar-singh-163179b4" target="_blank" class="ml-4 text-gray-600 hover:text-blue-600 transition-colors">LinkedIn</a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="bg-gray-800 text-gray-300 py-3 sticky top-0 z-10 shadow-lg">
+        <div class="container mx-auto px-4 flex justify-center space-x-8">
+            <a href="#about" class="hover:text-white transition-colors duration-300 text-lg font-medium tab-link" data-tab="about">About Me</a>
+            <a href="#research" class="hover:text-white transition-colors duration-300 text-lg font-medium tab-link" data-tab="research">Research</a>
+            <a href="#papers" class="hover:text-white transition-colors duration-300 text-lg font-medium tab-link" data-tab="papers">Publications</a> <a href="#skills" class="hover:text-white transition-colors duration-300 text-lg font-medium tab-link" data-tab="skills">Skills</a> <a href="#cv" class="hover:text-white transition-colors duration-300 text-lg font-medium tab-link" data-tab="cv">CV</a>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8">
+        <section id="about" class="tab-content active">
+            <div class="flex flex-col md:flex-row items-center gap-12 bg-white p-8 rounded-lg shadow-md">
+                <div class="md:w-1/4 flex justify-center">
+                     <img src="https://placehold.co/256x256/e0e0e0/333?text=NKS" alt="Nitin Kumar Singh" class="rounded-full shadow-lg w-56 h-56 md:w-64 md:h-64 object-cover border-4 border-gray-300">
+                </div>
+                <div class="md:w-3/4 text-center md:text-left">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">About Me</h2>
+                    <p class="text-gray-700 text-lg leading-relaxed">
+                        I am a Postdoctoral Researcher at Michigan State University, advised by Dr. Josh Vermaas. My research focuses on leveraging **Molecular Simulations**, **Computational Chemistry/Biology**, and **Machine Learning** techniques to address challenges in **Drug Discovery**, **Drug Delivery**, and **Enzyme Engineering**.
+                    </p>
+                    <p class="text-gray-700 text-lg mt-4 leading-relaxed">
+                        Previously, I completed my PhD in Chemical Engineering at the Indian Institute of Technology Gandhinagar, where my dissertation explored the role of charged residues in protein structural dynamics and adsorption under the guidance of Dr. Mithun Radhakrishna. I am passionate about applying computational methods to understand complex biological systems and contribute to scientific advancements.
+                    </p>
+                     <div class="mt-6 flex justify-center md:justify-start space-x-4">
+                         <a href="https://github.com/singhnitink" target="_blank" class="text-blue-600 hover:underline">GitHub</a>
+                         <a href="https://scholar.google.com/citations?user=YOUR_GSCHOLAR_ID" target="_blank" class="text-blue-600 hover:underline">Google Scholar</a> <a href="https://www.linkedin.com/in/nitin-kumar-singh-163179b4" target="_blank" class="text-blue-600 hover:underline">LinkedIn</a>
+                         <a href="https://proseqanalyser.iitgn.ac.in/" target="_blank" class="text-blue-600 hover:underline">PSSA Tool</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="research" class="tab-content hidden">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Research Interests</h2>
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <ul class="list-disc list-inside space-y-3 text-lg text-gray-700">
+                    <li>Molecular Simulations</li>
+                    <li>Computational Chemistry & Biology</li>
+                    <li>Drug Discovery & Design</li>
+                    <li>Drug Delivery Systems</li>
+                    <li>Machine Learning Applications in Biology/Chemistry</li>
+                    <li>Enzyme Engineering</li>
+                    <li>Investigating Protein Structural Dynamics and Adsorption</li>
+                    <li>Understanding Helical Stability of Peptides</li>
+                    <li>Protein Disaggregation Mechanisms</li>
+                    <li>Carbon Capture Technologies</li>
+                </ul>
+                <p class="mt-6 text-gray-700 text-lg">
+                    My work involves using computational tools like GROMACS, AMBER, NAMD, and machine learning frameworks to simulate and analyze biological molecules and materials. I aim to understand fundamental interactions and apply these insights to practical problems in health and materials science.
+                </p>
+                <h3 class="text-2xl font-semibold text-gray-800 mt-8 mb-4">Current Work</h3>
+                 <p class="text-gray-700 text-lg">
+                    As a Postdoctoral Researcher at Michigan State University, I am working with Dr. Josh Vermaas on [Briefly mention current research focus if you like, e.g., advanced simulation techniques for membrane proteins].
+                 </p>
+            </div>
+        </section>
+
+        <section id="papers" class="tab-content hidden">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Publications</h2>
+            <div class="space-y-6">
+                <div class="bg-white rounded-lg shadow-md p-6 paper-entry">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-1">Statistical analysis of the unique characteristics of secondary structures in proteins</h3>
+                    <p class="text-gray-600 italic">Nitin Kumar Singh, Manish Agarwal, and Mithun Radhakrishna.</p>
+                    <p class="text-gray-700 mt-1">Computational Biology and Chemistry (2024): 108237.</p>
+                    </div>
+                 <div class="bg-white rounded-lg shadow-md p-6 paper-entry">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-1">Hydrophobicity A single parameter for accurate prediction of disordered regions in proteins</h3>
+                    <p class="text-gray-600 italic">Nitin Kumar Singh, Pratyasha Bhardwaj, and Mithun Radhakrishna.</p>
+                    <p class="text-gray-700 mt-1">Journal of Chemical Information and Modeling, 63, 16 (2023): 5375-5383.</p>
+                </div>
+                 <div class="bg-white rounded-lg shadow-md p-6 paper-entry">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-1">Tuning Electrostatic Interactions to Control Orientation of GFP Protein Adsorption on Silica Surface</h3>
+                    <p class="text-gray-600 italic">Nitin Kumar Singh, Kartik Pushpavanam, and Mithun Radhakrishna.</p>
+                    <p class="text-gray-700 mt-1">ACS Applied Bio Materials, 7, 2 (2023): 596-608.</p>
+                </div>
+                 <div class="bg-white rounded-lg shadow-md p-6 paper-entry">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-1">Understanding the helical stability of charged peptides</h3>
+                    <p class="text-gray-600 italic">Nitin Kumar Singh, Manish Agarwal, and Mithun Radhakrishna.</p>
+                    <p class="text-gray-700 mt-1">Proteins: Structure, Function, and Bioinformatics 91, 2 (2023): 268-276.</p>
+                </div>
+                 <div class="bg-white rounded-lg shadow-md p-6 paper-entry">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-1">Understanding the role of hydrophobic patches in protein disaggregation</h3>
+                    <p class="text-gray-600 italic">Kumar, Avishek, Nitin Kumar Singh, Deepshikha Ghosh, and Mithun Radhakrishna.</p>
+                    <p class="text-gray-700 mt-1">Physical Chemistry Chemical Physics 23, no. 22 (2021): 12620-12629.</p>
+                </div>
+                 <div class="bg-white rounded-lg shadow-md p-6 paper-entry">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-1">Highly selective carbon capture by novel graphene-carbon nanotube hybrids</h3>
+                    <p class="text-gray-600 italic">Medesety, Padmesh, Hrushikesh M. Gade, Nitin Kumar Singh, and Piyush P. Wanjari.</p>
+                    <p class="text-gray-700 mt-1">Molecular Simulation 47, no. 16 (2021): 1326-1334.</p>
+                </div>
+            </div>
+        </section>
+
+         <section id="skills" class="tab-content hidden">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Technical Skills</h2>
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-700 mb-3 border-b pb-1">Simulation & Modeling</h3>
+                        <ul class="list-disc list-inside space-y-1 text-gray-700">
+                            <li>GROMACS, AMBER, NAMD, LAMMPS</li>
+                            <li>Gaussian, GAMESS</li>
+                            <li>Packmol, AutoDock Vina</li>
+                            <li>Open Babel, HADDOCK</li>
+                            <li>AlphaFold, RosettaFold</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-700 mb-3 border-b pb-1">Programming & Scripting</h3>
+                        <ul class="list-disc list-inside space-y-1 text-gray-700">
+                            <li>Python (Scikit-learn, TensorFlow, RDKit)</li>
+                            <li>Bash, Batch scripting</li>
+                            <li>FORTRAN, Tcl scripting</li>
+                            <li>HTML, PHP</li>
+                            <li>MATLAB</li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h3 class="text-xl font-semibold text-blue-700 mb-3 border-b pb-1">HPC & Visualization</h3>
+                        <ul class="list-disc list-inside space-y-1 text-gray-700">
+                            <li>Linux Clusters (SLURM, PBS)</li>
+                            <li>VMD, UCSF Chimera, PyMOL</li>
+                            <li>Avogadro, Gnuplot, Grace</li>
+                            <li>Matplotlib</li>
+                            <li>Originlab, Graphpad Prism</li>
+                        </ul>
+                    </div>
+                     <div class="md:col-span-2 lg:col-span-1">
+                        <h3 class="text-xl font-semibold text-blue-700 mb-3 border-b pb-1">Biotechnology Lab Skills</h3>
+                        <ul class="list-disc list-inside space-y-1 text-gray-700">
+                            <li>Gel Electrophoresis, PCR</li>
+                            <li>Spectroscopy & Spectrophotometry</li>
+                            <li>Cell Culture</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cv" class="tab-content hidden">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Curriculum Vitae</h2>
+             <div class="text-center bg-white rounded-lg shadow-md p-8">
+                 <p class="text-lg text-gray-700 mb-6">Download my full academic CV for more details on my education, experience, and achievements.</p>
+                <a href="Nitin_Kumar_Singh_Academic_CV_Copy.pdf"
+                   class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg text-lg transition duration-300 ease-in-out transform hover:-translate-y-1 shadow-md hover:shadow-lg"
+                   target="_blank" download> Download CV (PDF)
+                </a>
+             </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 text-gray-400 py-6 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>© 2024 Nitin Kumar Singh. All rights reserved.</p>
+            <p class="text-sm mt-2">Built with HTML, Tailwind CSS, and JavaScript.</p>
+        </div>
+    </footer>
+
+    <script>
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        // Function to handle tab switching
+        function switchTab(tabName) {
+            // Remove active styles from all links and hide all content
+            tabLinks.forEach(link => {
+                link.classList.remove('active-tab', 'text-white');
+                link.classList.add('text-gray-300'); // Reset to default color
+            });
+            tabContents.forEach(content => {
+                content.classList.add('hidden');
+                content.style.opacity = 0; // Start hidden content as transparent
+            });
+
+            // Find the clicked link and corresponding content
+            const activeLink = document.querySelector(`.tab-link[data-tab="${tabName}"]`);
+            const activeContent = document.getElementById(tabName);
+
+            // Apply active styles to the clicked link
+            if (activeLink) {
+                activeLink.classList.add('active-tab', 'text-white');
+                activeLink.classList.remove('text-gray-300');
+            }
+
+            // Show the corresponding content with a fade-in effect
+            if (activeContent) {
+                activeContent.classList.remove('hidden');
+                // Use a timeout to allow the display property to change before starting opacity transition
+                setTimeout(() => {
+                    activeContent.style.opacity = 1;
+                }, 50); // Small delay
+            }
+        }
+
+        // Add click event listeners to tab links
+        tabLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default anchor link behavior
+                const tabName = this.getAttribute('data-tab');
+                switchTab(tabName);
+                // Update URL hash without jumping
+                history.pushState(null, null, `#${tabName}`);
+            });
+        });
+
+        // Check URL hash on page load to activate the correct tab
+        const currentHash = window.location.hash.substring(1); // Get hash without '#'
+        const validTabs = Array.from(tabLinks).map(link => link.getAttribute('data-tab'));
+
+        if (currentHash && validTabs.includes(currentHash)) {
+            switchTab(currentHash); // Activate tab from URL hash
+        } else {
+            switchTab('about'); // Default to 'about' tab
+            history.pushState(null, null, '#about'); // Set default hash
+        }
+
+         // Handle back/forward navigation
+        window.addEventListener('popstate', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash && validTabs.includes(hash)) {
+                switchTab(hash);
+            } else {
+                switchTab('about'); // Fallback to default if hash is invalid or missing
+            }
+        });
+    </script>
+</body>
+</html>
