@@ -8,6 +8,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CE83XJTP97"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-CE83XJTP97');
+    </script>
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -106,17 +116,6 @@
         }
     </style>
 </head>
-
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CE83XJTP97"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-CE83XJTP97');
-</script>
-    
 <body class="bg-gray-100">
     <header class="bg-white shadow-md py-4">
         <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
@@ -136,6 +135,7 @@
             <a href="#research" class="hover:text-white transition-colors duration-300 text-base md:text-lg font-medium tab-link whitespace-nowrap" data-tab="research">Research</a>
             <a href="#papers" class="hover:text-white transition-colors duration-300 text-base md:text-lg font-medium tab-link whitespace-nowrap" data-tab="papers">Publications</a>
             <a href="#skills" class="hover:text-white transition-colors duration-300 text-base md:text-lg font-medium tab-link whitespace-nowrap" data-tab="skills">Skills</a>
+            <a href="#media" class="hover:text-white transition-colors duration-300 text-base md:text-lg font-medium tab-link whitespace-nowrap" data-tab="media">Media</a> 
             <a href="#cv" class="hover:text-white transition-colors duration-300 text-base md:text-lg font-medium tab-link whitespace-nowrap" data-tab="cv">CV</a>
         </div>
     </nav>
@@ -328,6 +328,93 @@
             </div>
         </section>
 
+
+       <section id="media" class="tab-content hidden">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-8 text-center">Media Gallery</h2>
+
+            <div class="overflow-x-auto">
+                <table class="media-table">
+                    <thead class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal hidden sm:table-header-group">
+                        <tr>
+                            <th class="py-3 px-6 text-left w-1/3 lg:w-1/4">Media</th>
+                            <th class="py-3 px-6 text-left">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700 text-sm">
+                        <tr class="hover:bg-gray-50">
+                            <td class="w-full sm:w-auto">
+                                <video controls preload="metadata">
+                                    <source src="GFP1.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </td>
+                            <td> 
+                                Mutatnt GFP adsorption on Silica Surface
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td>
+                                <video controls preload="metadata">
+                                    <source src="GFP2.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </td>
+                            <td>
+                                Mutatnt GFP adsorption on Silica Surface
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td>
+                                <video controls preload="metadata">
+                                    <source src="movie_2_new.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </td>
+                            <td>
+                                Small molecules interacting with cell membrane
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td> {/* Cell for image */}
+                                <img src="patterns.png" alt="Different patterns of lysine-leucine peptide"
+                                     onerror="this.onerror=null; this.src='https://placehold.co/600x400/e0e0e0/777?text=Image+Not+Found';">
+                            </td>
+                            <td> 
+                                Different patterns of lysine-leucine peptide
+                            </td>
+                        </tr>
+                         <tr class="hover:bg-gray-50">
+                            <td>
+                                <img src="M1_M2_orientation.png" alt="Different GFP mutants adsorbing on silica surface"
+                                     onerror="this.onerror=null; this.src='https://placehold.co/600x400/e0e0e0/777?text=Image+Not+Found';">
+                            </td>
+                            <td>
+                                Different GFP mutants adsorbing on silica surface
+                            </td>
+                        </tr>
+                         <tr class="hover:bg-gray-50">
+                            <td>
+                                <img src="hydrodispred.png" alt="The Hydrodispread algorithm"
+                                     onerror="this.onerror=null; this.src='https://placehold.co/600x400/e0e0e0/777?text=Image+Not+Found';">
+                            </td>
+                            <td>
+                                The Hydrodispread algorithm to find disordered regions in protein sequence
+                            </td>
+                        </tr>
+                         <tr class="hover:bg-gray-50">
+                            <td>
+                                <img src="PSSA.png" alt="The Helixpred algorithm"
+                                     onerror="this.onerror=null; this.src='https://placehold.co/600x400/e0e0e0/777?text=Image+Not+Found';">
+                            </td>
+                            <td>
+                                The Helixpred algorithm to define the α-helix formation capability of a given sequence
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
         <section id="cv" class="tab-content hidden">
             <h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Curriculum Vitae</h2>
              <div class="text-center bg-white rounded-lg shadow-md p-8">
@@ -351,7 +438,7 @@
         const tabLinks = document.querySelectorAll('.tab-link');
         const tabContents = document.querySelectorAll('.tab-content');
 
-        // Function to handle tab switching
+        // Function to handle tab switching (*** GA Tracking Logic Needs to be Added Here ***)
         function switchTab(tabName) {
             // Remove active styles from all links and hide all content
             tabLinks.forEach(link => {
@@ -381,9 +468,10 @@
                     activeContent.style.opacity = 1;
                 }, 50); // Small delay
             }
+             // *** GA Tracking Logic Missing Here ***
         }
 
-        // Add click event listeners to tab links
+        // Add click event listeners to tab links (*** Needs Update for GA ***)
         tabLinks.forEach(link => {
             link.addEventListener('click', function(event) {
                 event.preventDefault(); // Prevent default anchor link behavior
@@ -394,7 +482,7 @@
             });
         });
 
-        // Check URL hash on page load to activate the correct tab
+        // Check URL hash on page load to activate the correct tab (*** Needs Update for GA ***)
         const currentHash = window.location.hash.substring(1); // Get hash without '#'
         const validTabs = Array.from(tabLinks).map(link => link.getAttribute('data-tab'));
 
@@ -408,7 +496,7 @@
             }
         }
 
-         // Handle back/forward navigation using popstate
+         // Handle back/forward navigation using popstate (*** Needs Update for GA ***)
         window.addEventListener('popstate', function() {
             const hash = window.location.hash.substring(1);
             if (hash && validTabs.includes(hash)) {
