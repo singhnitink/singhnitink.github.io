@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAMD Expert Chatbot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Tailwind gray-100 */
+        }
+        #chat-container {
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 240px); /* Adjusted for header, input, footer, and clear buttons */
+            max-height: 650px; /* Max height for larger screens */
+        }
+        .chat-message {
+            padding: 10px 16px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        .user-message {
+            background-color: #3b82f6; /* Tailwind blue-500 */
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        .bot-message {
+            background-color: #e5e7eb; /* Tailwind gray-200 */
+            color: #1f2937; /* Tailwind gray-800 */
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        #chat-messages::-webkit-scrollbar {
+            width: 8px;
+        }
+        #chat-messages::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        #chat-messages::-webkit-scrollbar-thumb {
+            background: #cbd5e1; /* Tailwind coolGray-300 */
+            border-radius: 10px;
+        }
+        #chat-messages::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af; /* Tailwind coolGray-400 */
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3b82f6;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        #message-box {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: none;
+            font-size: 0.875rem;
+        }
+        .message-box-error {
+            background-color: #ef4444;
+            color: white;
+        }
+        .message-box-info {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .clear-button {
+            background-color: #ef4444; /* Tailwind red-500 */
+            color: white;
+            font-weight: 500; /* semibold */
+            padding: 0.5rem 1rem; /* py-2 px-4 */
+            border-radius: 0.5rem; /* rounded-lg */
+            font-size: 0.875rem; /* text-sm */
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow */
+        }
+        .clear-button:hover {
+            background-color: #dc2626; /* Tailwind red-600 */
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-4">
+
+    <div id="message-box"></div>
+
+    <div class="w-full max-w-2xl bg-white shadow-xl rounded-lg p-6">
+        <header class="mb-4 text-center">
+            <h1 class="text-3xl font-bold text-gray-800">NAMD Expert Chatbot</h1>
+            <p class="text-sm text-gray-500 mt-1">Ask me anything about the NAMD Simulation Engine!</p>
+            <button id="clear-chat-top" class="clear-button mt-3">Clear Chat</button>
+        </header>
+
+        <div id="chat-container" class="mb-4">
+            <div id="chat-messages" class="flex-grow overflow-y-auto p-4 bg-gray-50 rounded-md border border-gray-200">
+                </div>
+        </div>
+
+        <div id="input-area" class="flex items-center gap-3">
+            <input type="text" id="user-input" class="flex-grow p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-shadow" placeholder="Type your NAMD question...">
+            <button id="send-button" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-150 ease-in-out flex items-center justify-center">
+                <span id="send-button-text">Send</span>
+                <div id="loading-spinner" class="loader hidden ml-2"></div>
+            </button>
+        </div>
+
+        <div class="mt-4 flex justify-center">
+            <button id="clear-chat-bottom" class="clear-button">Clear Chat</button>
+        </div>
+
+        <footer class="mt-6 text-center">
+            <p class="text-xs text-gray-400">
+                This chatbot uses Google's Gemini model, guided to answer NAMD-related questions.
+                It does not train on new data in real-time. Responses are based on the model's existing knowledge.
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        const userInputField = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+        const sendButtonText = document.getElementById('send-button-text');
+        const loadingSpinner = document.getElementById('loading-spinner');
+        const chatMessagesContainer = document.getElementById('chat-messages');
+        const messageBox = document.getElementById('message-box');
+        const clearChatTopButton = document.getElementById('clear-chat-top');
+        const clearChatBottomButton = document.getElementById('clear-chat-bottom');
+
+        const initialSystemPrompt = {
+            role: "user",
+            parts: [{ text: "You are an expert assistant specializing in the NAMD (Nanoscale Molecular Dynamics) simulation engine. Your knowledge base includes NAMD documentation, tutorials, and common questions from the NAMD community. Answer the user's questions about NAMD accurately and concisely. If a question is unrelated to NAMD, politely state that you are specialized in NAMD-related topics and cannot answer the unrelated question."}]
+        };
+        const initialModelResponseToSystemPrompt = {
+            role: "model",
+            parts: [{ text: "Understood. I am ready to assist with your NAMD questions. How can I help?"}]
+        };
+        const initialBotGreetingForUI = "Hello! I'm here to help with your questions about NAMD. How can I assist you today?";
+
+        let chatHistory = [initialSystemPrompt, initialModelResponseToSystemPrompt];
+
+        function addMessageToChat(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('chat-message', sender === 'user' ? 'user-message' : 'bot-message');
+            // Basic sanitization for text content to prevent HTML injection
+            const textNode = document.createTextNode(text);
+            messageDiv.appendChild(textNode);
+            chatMessagesContainer.appendChild(messageDiv);
+            chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+        }
+
+        function setLoading(isLoading) {
+            if (isLoading) {
+                sendButtonText.classList.add('hidden');
+                loadingSpinner.classList.remove('hidden');
+                sendButton.disabled = true;
+                userInputField.disabled = true;
+            } else {
+                sendButtonText.classList.remove('hidden');
+                loadingSpinner.classList.add('hidden');
+                sendButton.disabled = false;
+                userInputField.disabled = false;
+                userInputField.focus();
+            }
+        }
+
+        function showTemporaryMessage(message, type = 'error', duration = 5000) {
+            messageBox.textContent = message;
+            messageBox.className = '';
+            messageBox.classList.add(type === 'error' ? 'message-box-error' : 'message-box-info');
+            messageBox.style.display = 'block';
+            setTimeout(() => {
+                messageBox.style.display = 'none';
+            }, duration);
+        }
+
+        async function sendMessage() {
+            const userInput = userInputField.value.trim();
+            if (!userInput) return;
+
+            addMessageToChat(userInput, 'user');
+            chatHistory.push({ role: "user", parts: [{ text: userInput }] });
+            userInputField.value = '';
+            setLoading(true);
+
+            const apiKey = ""; // Provided by the environment
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+            
+            const payload = { contents: chatHistory };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`API request failed with status ${response.status}: ${errorData?.error?.message || 'Unknown error'}`);
+                }
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const botResponse = result.candidates[0].content.parts[0].text;
+                    addMessageToChat(botResponse, 'bot');
+                    chatHistory.push({ role: "model", parts: [{ text: botResponse }] });
+                } else if (result.promptFeedback && result.promptFeedback.blockReason) {
+                    const blockMessage = `Your request was blocked. Reason: ${result.promptFeedback.blockReason}. Please rephrase.`;
+                    addMessageToChat(blockMessage, 'bot');
+                    chatHistory.push({ role: "model", parts: [{ text: blockMessage }] }); // Also add this to history
+                } else {
+                    throw new Error('Received an empty or malformed response from the bot.');
+                }
+            } catch (error) {
+                console.error('Error sending message:', error);
+                const errorMessage = `Sorry, an error occurred: ${error.message}. Please try again.`;
+                addMessageToChat(errorMessage, 'bot');
+                showTemporaryMessage(error.message || "Failed to get response.", 'error');
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        function clearChat() {
+            chatMessagesContainer.innerHTML = ''; // Clear visual chat
+            addMessageToChat(initialBotGreetingForUI, 'bot'); // Add back the initial greeting
+            chatHistory = [initialSystemPrompt, initialModelResponseToSystemPrompt]; // Reset chat history for the API
+            showTemporaryMessage("Chat cleared!", 'info', 2000);
+            userInputField.focus();
+        }
+
+        // Event Listeners
+        sendButton.addEventListener('click', sendMessage);
+        userInputField.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        clearChatTopButton.addEventListener('click', clearChat);
+        clearChatBottomButton.addEventListener('click', clearChat);
+
+        // Initial setup
+        addMessageToChat(initialBotGreetingForUI, 'bot'); // Display initial greeting on load
+        userInputField.focus();
+
+    </script>
+</body>
+</html>
