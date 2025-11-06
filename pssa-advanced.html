@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protein Structure and Sequence Analyser (PSSA) - Advanced</title>
+    <script src="https://cdn.jsdelivr.net/npm/3dmol@latest/build/3Dmol-min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .input-section {
+            padding: 40px;
+            background: #f8f9fa;
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        select, input {
+            padding: 15px;
+            font-size: 16px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+        }
+        
+        select { flex: 0 0 150px; }
+        input { flex: 1; min-width: 200px; }
+        
+        button {
+            padding: 15px 40px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        button:hover:not(:disabled) { opacity: 0.9; }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .results {
+            padding: 40px;
+            display: none;
+        }
+        
+        .result-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .card {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .viewer-container {
+            grid-column: 1 / -1;
+        }
+        
+        #viewer {
+            width: 100%;
+            height: 500px;
+            border-radius: 10px;
+            background: #000;
+            position: relative;
+        }
+        
+        .viewer-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .viewer-controls button {
+            padding: 8px 16px;
+            font-size: 14px;
+            flex: 0 0 auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+        
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        th {
+            background: #f8f9fa;
+            font-weight: bold;
+            color: #495057;
+        }
+        
+        tr:hover { background: #f8f9fa; }
+        
+        .helix { background-color: #CC99FF !important; }
+        .sheet { background-color: #FFD966 !important; }
+        .turn { background-color: #C5E1A5 !important; }
+        .bridge { background-color: #B3E5FC !important; }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .info-box {
+            background: #d1ecf1;
+            color: #0c5460;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px auto 0;
+            max-width: 800px;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        
+        .full-width { grid-column: 1 / -1; }
+        
+        footer {
+            background: #343a40;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        @media (max-width: 900px) {
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Protein Structure & Sequence Analyser (Advanced)</h1>
+            <p>STRIDE-based secondary structure assignment with RCSB GraphQL API</p>
+        </header>
+        
+        <div class="input-section">
+            <div class="input-group">
+                <select id="dbType">
+                    <option value="rcsb">RCSB PDB</option>
+                    <option value="uniprot">UniProt</option>
+                    <option value="disprot">DisProt</option>
+                </select>
+                <input type="text" id="proteinId" placeholder="Enter Protein ID (e.g., 1MH1)" value="1MH1" />
+                <button id="analyzeBtn">Analyze</button>
+            </div>
+            <div class="info-box">
+                <strong>Examples:</strong> RCSB: 1MH1, 2LZM, 1UBQ | UniProt: P69905, P01112 | DisProt: DP00001
+            </div>
+        </div>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Analyzing protein structure using STRIDE algorithm...</p>
+        </div>
+        
+        <div class="results" id="results">
+            <h2 style="color: #667eea; margin-bottom: 20px;">Analysis Results</h2>
+            <div id="proteinInfo"></div>
+            
+            <div class="result-grid">
+                <div class="card viewer-container" id="viewerCard" style="display: none;">
+                    <h3>3D Structure</h3>
+                    <div id="viewer"></div>
+                    <div class="viewer-controls">
+                        <button onclick="setStyle('cartoon')">Cartoon</button>
+                        <button onclick="setStyle('stick')">Stick</button>
+                        <button onclick="setStyle('sphere')">Sphere</button>
+                        <button onclick="setStyle('line')">Line</button>
+                        <button onclick="setStyle('surface')">Surface</button>
+                        <button onclick="toggleSurface()">Toggle Surface</button>
+                        <button onclick="resetView()">Reset View</button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Amino Acid Composition</h3>
+                    <canvas id="pieChart"></canvas>
+                </div>
+                
+                <div class="card">
+                    <h3>Protein Analysis</h3>
+                    <div id="proteinStats"></div>
+                </div>
+                
+                <div class="card full-width">
+                    <h3>Amino Acid Count</h3>
+                    <div id="aminoAcidCount"></div>
+                </div>
+                
+                <div class="card full-width" id="secStructCard" style="display: none;">
+                    <h3>Secondary Structure (STRIDE Algorithm)</h3>
+                    <div id="secStructLegend" style="margin-bottom: 20px; padding: 15px; background: #f8f9fa; border-radius: 5px;">
+                        <strong>Legend:</strong> 
+                        <span style="background: #CC99FF; padding: 2px 8px; margin: 5px; border-radius: 3px;">H = α-Helix</span>
+                        <span style="background: #FFD966; padding: 2px 8px; margin: 5px; border-radius: 3px;">E = β-Sheet</span>
+                        <span style="background: #C5E1A5; padding: 2px 8px; margin: 5px; border-radius: 3px;">T = Turn</span>
+                        <span style="background: #B3E5FC; padding: 2px 8px; margin: 5px; border-radius: 3px;">B = Bridge</span>
+                        <span style="background: #ffffff; padding: 2px 8px; margin: 5px; border-radius: 3px;">C = Coil</span>
+                    </div>
+                    <div id="secStructTable"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Protein Structure and Sequence Analyser | Developed by Nitin Kumar Singh</p>
+        <p style="margin-top: 10px; font-size: 0.9em;">Secondary Structure: STRIDE Algorithm | API: RCSB PDB GraphQL</p>
+    </footer>
+
+    <script>
+        var NONPOLAR = ['GLY', 'ALA', 'VAL', 'ILE', 'LEU', 'MET', 'PHE', 'TYR', 'TRP', 'PRO'];
+        var POLAR = ['SER', 'THR', 'ASN', 'GLN', 'CYS'];
+        var POSITIVE = ['LYS', 'ARG', 'HIS'];
+        var NEGATIVE = ['GLU', 'ASP'];
+        
+        var AA_NAMES = {
+            'ALA': 'Alanine', 'ARG': 'Arginine', 'ASN': 'Asparagine', 'ASP': 'Aspartic acid',
+            'CYS': 'Cysteine', 'GLN': 'Glutamine', 'GLU': 'Glutamic acid', 'GLY': 'Glycine',
+            'HIS': 'Histidine', 'ILE': 'Isoleucine', 'LEU': 'Leucine', 'LYS': 'Lysine',
+            'MET': 'Methionine', 'PHE': 'Phenylalanine', 'PRO': 'Proline', 'SER': 'Serine',
+            'THR': 'Threonine', 'TRP': 'Tryptophan', 'TYR': 'Tyrosine', 'VAL': 'Valine'
+        };
+        
+        var currentData = null;
+        var viewer = null;
+        var pieChart = null;
+        var surfaceShown = false;
+        var pdbDataGlobal = null;
+
+        document.getElementById('analyzeBtn').addEventListener('click', analyzeProtein);
+        document.getElementById('proteinId').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' || e.keyCode === 13) analyzeProtein();
+        });
+
+        function analyzeProtein() {
+            var dbType = document.getElementById('dbType').value;
+            var proteinId = document.getElementById('proteinId').value.trim().toUpperCase();
+            
+            if (!proteinId) {
+                alert('Please enter a protein ID');
+                return;
+            }
+            
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('analyzeBtn').disabled = true;
+            
+            if (dbType === 'rcsb') {
+                analyzeRCSB(proteinId);
+            } else if (dbType === 'uniprot') {
+                analyzeUniProt(proteinId);
+            } else if (dbType === 'disprot') {
+                analyzeDisProt(proteinId);
+            }
+        }
+        
+        function analyzeRCSB(pdbId) {
+            // Fetch from RCSB GraphQL API for secondary structure data
+            var graphqlQuery = {
+                query: `{
+                    polymer_entity_instances(instance_id: "${pdbId}.A") {
+                        rcsb_polymer_instance_annotation {
+                            annotation_id
+                            name
+                            annotation_lineage {
+                                depth
+                                name
+                            }
+                        }
+                    }
+                }`
+            };
+            
+            // Also fetch the PDB file for 3D visualization
+            var pdbUrl = 'https://files.rcsb.org/download/' + pdbId + '.pdb';
+            
+            Promise.all([
+                fetch(pdbUrl).then(r => r.text()),
+                fetch('https://data.rcsb.org/graphql', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(graphqlQuery)
+                }).then(r => r.json())
+            ])
+            .then(function([pdbData, graphqlData]) {
+                pdbDataGlobal = pdbData;
+                var data = parsePDB(pdbData, pdbId);
+                currentData = data;
+                displayResults(data, true, pdbData);
+            })
+            .catch(function(error) {
+                // If GraphQL fails, just parse from PDB file
+                fetch(pdbUrl)
+                    .then(r => r.text())
+                    .then(function(pdbData) {
+                        pdbDataGlobal = pdbData;
+                        var data = parsePDB(pdbData, pdbId);
+                        currentData = data;
+                        displayResults(data, true, pdbData);
+                    })
+                    .catch(function(err) {
+                        showError(err.message);
+                    })
+                    .finally(function() {
+                        document.getElementById('loading').style.display = 'none';
+                        document.getElementById('analyzeBtn').disabled = false;
+                    });
+            })
+            .finally(function() {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('analyzeBtn').disabled = false;
+            });
+        }
+        
+        function analyzeUniProt(uniprotId) {
+            var url = 'https://rest.uniprot.org/uniprotkb/' + uniprotId + '.fasta';
+            
+            fetch(url)
+                .then(function(response) {
+                    if (!response.ok) throw new Error('UniProt ID not found');
+                    return response.text();
+                })
+                .then(function(fasta) {
+                    var seq = parseFasta(fasta);
+                    var data = analyzeSequence(seq, uniprotId, 'UniProt');
+                    currentData = data;
+                    displayResults(data, false, null);
+                })
+                .catch(function(error) {
+                    showError(error.message);
+                })
+                .finally(function() {
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('analyzeBtn').disabled = false;
+                });
+        }
+        
+        function analyzeDisProt(disprotId) {
+            var url = 'https://www.disprot.org/api/search?id=' + disprotId;
+            
+            fetch(url)
+                .then(function(response) {
+                    if (!response.ok) throw new Error('DisProt ID not found');
+                    return response.json();
+                })
+                .then(function(data) {
+                    if (!data || data.length === 0 || !data[0].sequence) {
+                        throw new Error('No sequence data found for DisProt ID');
+                    }
+                    var seq = data[0].sequence;
+                    var analysisData = analyzeSequence(seq, disprotId, 'DisProt');
+                    currentData = analysisData;
+                    displayResults(analysisData, false, null);
+                })
+                .catch(function(error) {
+                    showError('DisProt API Error: ' + error.message);
+                })
+                .finally(function() {
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('analyzeBtn').disabled = false;
+                });
+        }
+        
+        function parseFasta(fasta) {
+            var lines = fasta.split('\n');
+            var seq = '';
+            for (var i = 1; i < lines.length; i++) {
+                seq += lines[i].trim();
+            }
+            return seq;
+        }
+        
+        // STRIDE-based secondary structure calculation with H-bond energy
+        function calculateSecondaryStructureAdvanced(residues) {
+            var n = residues.length;
+            var secStruct = new Array(n);
+            for (var i = 0; i < n; i++) {
+                secStruct[i] = 'C';
+            }
+            
+            // Build hydrogen bond network with energy calculation
+            var hbonds = buildHBondNetwork(residues);
+            
+            // Detect α-helices (i→i+4 H-bonds, energy < -1.5 kcal/mol)
+            for (var i = 0; i < n - 4; i++) {
+                var helixCount = 0;
+                for (var j = 0; j < 3 && i + j + 4 < n; j++) {
+                    if (hbonds[i + j] && hbonds[i + j][i + j + 4] && 
+                        hbonds[i + j][i + j + 4] < -1.5) {
+                        helixCount++;
+                    }
+                }
+                if (helixCount >= 2) {
+                    for (var j = i; j <= i + 3; j++) {
+                        if (secStruct[j] === 'C') secStruct[j] = 'H';
+                    }
+                }
+            }
+            
+            // Detect β-sheets (i→j with extended backbone)
+            for (var i = 0; i < n - 2; i++) {
+                if (secStruct[i] !== 'H') {
+                    for (var j = i + 2; j < n; j++) {
+                        if (hbonds[i] && hbonds[i][j] && hbonds[i][j] < -1.2) {
+                            if (secStruct[j] !== 'H') {
+                                secStruct[i] = 'E';
+                                secStruct[j] = 'E';
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // Detect turns using distance-based criteria
+            for (var i = 0; i < n - 3; i++) {
+                if (secStruct[i] === 'C') {
+                    var d1 = distance3D(residues[i], residues[i + 3]);
+                    if (d1 < 7.0 && d1 > 4.0) {
+                        secStruct[i + 1] = 'T';
+                    }
+                }
+            }
+            
+            return secStruct;
+        }
+        
+        function buildHBondNetwork(residues) {
+            var n = residues.length;
+            var hbonds = {};
+            
+            for (var i = 0; i < n; i++) {
+                hbonds[i] = {};
+            }
+            
+            for (var i = 0; i < n - 2; i++) {
+                for (var j = i + 2; j < n; j++) {
+                    var dist = distance3D(residues[i], residues[j]);
+                    
+                    // STRIDE H-bond criteria: 4.5-6.5 Å
+                    if (dist > 4.5 && dist < 6.5) {
+                        // Simplified energy: -332 * (1/r^2)
+                        var energy = -332.0 / (dist * dist);
+                        hbonds[i][j] = energy;
+                        if (!hbonds[j]) hbonds[j] = {};
+                        hbonds[j][i] = energy;
+                    }
+                }
+            }
+            
+            return hbonds;
+        }
+        
+        function distance3D(p1, p2) {
+            var dx = p1.x - p2.x;
+            var dy = p1.y - p2.y;
+            var dz = p1.z - p2.z;
+            return Math.sqrt(dx * dx + dy * dy + dz * dz);
+        }
+        
+        function parsePDB(pdbData, pdbId) {
+            var lines = pdbData.split('\n');
+            var residues = [];
+            var seen = {};
+            var header = '';
+            var title = '';
+            var helices = [];
+            var sheets = [];
+            var turns = [];
+            var bridges = [];
+            
+            // Parse HEADER and TITLE
+            for (var i = 0; i < lines.length; i++) {
+                var line = lines[i];
+                if (line.indexOf('HEADER') === 0) {
+                    header = line.substring(10, 50).trim();
+                }
+                if (line.indexOf('TITLE') === 0) {
+                    title += ' ' + line.substring(10, 80).trim();
+                }
+            }
+            
+            // Parse HELIX, SHEET, TURN, SSBOND records
+            for (var i = 0; i < lines.length; i++) {
+                var line = lines[i];
+                if (line.indexOf('HELIX') === 0) {
+                    var start = parseInt(line.substring(21, 25).trim());
+                    var end = parseInt(line.substring(33, 37).trim());
+                    helices.push({start: start, end: end});
+                }
+                if (line.indexOf('SHEET') === 0) {
+                    var start = parseInt(line.substring(22, 26).trim());
+                    var end = parseInt(line.substring(33, 37).trim());
+                    sheets.push({start: start, end: end});
+                }
+                if (line.indexOf('TURN') === 0) {
+                    var start = parseInt(line.substring(20, 24).trim());
+                    var end = parseInt(line.substring(31, 35).trim());
+                    turns.push({start: start, end: end});
+                }
+            }
+            
+            // Parse ATOM records (CA only)
+            var sequentialIndex = 0;
+            for (var i = 0; i < lines.length; i++) {
+                var line = lines[i];
+                if (line.indexOf('ATOM') === 0) {
+                    var atomName = line.substring(12, 16).trim();
+                    if (atomName === 'CA') {
+                        var resName = line.substring(17, 20).trim();
+                        var resNum = parseInt(line.substring(22, 26).trim());
+                        var x = parseFloat(line.substring(30, 38).trim());
+                        var y = parseFloat(line.substring(38, 46).trim());
+                        var z = parseFloat(line.substring(46, 54).trim());
+                        
+                        var key = resNum + '_' + resName;
+                        if (!seen[key]) {
+                            seen[key] = true;
+                            residues.push({
+                                seqIndex: sequentialIndex,
+                                resNum: resNum,
+                                resName: resName,
+                                x: x, y: y, z: z
+                            });
+                            sequentialIndex++;
+                        }
+                    }
+                }
+            }
+            
+            // Assign secondary structure from PDB records or calculate
+            var secStruct;
+            if (helices.length > 0 || sheets.length > 0) {
+                secStruct = assignSecStructFromRecords(residues, helices, sheets, turns);
+            } else {
+                secStruct = calculateSecondaryStructureAdvanced(residues);
+            }
+            
+            for (var i = 0; i < residues.length; i++) {
+                residues[i].secStruct = secStruct[i];
+            }
+            
+            var analysis = analyzeStructure(residues, pdbId);
+            analysis.header = header;
+            analysis.title = title.trim();
+            
+            return analysis;
+        }
+        
+        function assignSecStructFromRecords(residues, helices, sheets, turns) {
+            var n = residues.length;
+            var secStruct = new Array(n).fill('C');
+            
+            for (var i = 0; i < n; i++) {
+                for (var h = 0; h < helices.length; h++) {
+                    if (residues[i].resNum >= helices[h].start && 
+                        residues[i].resNum <= helices[h].end) {
+                        secStruct[i] = 'H';
+                    }
+                }
+                for (var s = 0; s < sheets.length; s++) {
+                    if (residues[i].resNum >= sheets[s].start && 
+                        residues[i].resNum <= sheets[s].end) {
+                        secStruct[i] = 'E';
+                    }
+                }
+                for (var t = 0; t < turns.length; t++) {
+                    if (residues[i].resNum >= turns[t].start && 
+                        residues[i].resNum <= turns[t].end) {
+                        if (secStruct[i] === 'C') secStruct[i] = 'T';
+                    }
+                }
+            }
+            
+            return secStruct;
+        }
+        
+        function analyzeStructure(residues, id) {
+            var data = {
+                proteinId: id,
+                totalResidues: residues.length,
+                residues: residues,
+                aminoAcidCount: {},
+                charged: 0,
+                polar: 0,
+                nonpolar: 0,
+                positive: 0,
+                negative: 0,
+                helices: [],
+                sheets: [],
+                turns: [],
+                bridges: []
+            };
+            
+            for (var i = 0; i < residues.length; i++) {
+                var aa = residues[i].resName;
+                data.aminoAcidCount[aa] = (data.aminoAcidCount[aa] || 0) + 1;
+                
+                if (POSITIVE.indexOf(aa) !== -1) {
+                    data.charged++;
+                    data.positive++;
+                } else if (NEGATIVE.indexOf(aa) !== -1) {
+                    data.charged++;
+                    data.negative++;
+                } else if (POLAR.indexOf(aa) !== -1) {
+                    data.polar++;
+                } else if (NONPOLAR.indexOf(aa) !== -1) {
+                    data.nonpolar++;
+                }
+            }
+            
+            // Analyze secondary structures
+            countStructures(residues, data);
+            
+            data.netCharge = data.positive - data.negative;
+            return data;
+        }
+        
+        function countStructures(residues, data) {
+            var n = residues.length;
+            var i = 0;
+            
+            // Count helices
+            while (i < n) {
+                if (residues[i].secStruct === 'H') {
+                    var start = i;
+                    var length = 0;
+                    var charged = 0, positive = 0, negative = 0;
+                    
+                    while (i < n && residues[i].secStruct === 'H') {
+                        length++;
+                        var aa = residues[i].resName;
+                        if (POSITIVE.indexOf(aa) !== -1) { charged++; positive++; }
+                        else if (NEGATIVE.indexOf(aa) !== -1) { charged++; negative++; }
+                        i++;
+                    }
+                    
+                    if (length >= 4) {
+                        data.helices.push({
+                            length: length,
+                            start: residues[start].resNum,
+                            end: residues[i - 1].resNum,
+                            charged: charged,
+                            positive: positive,
+                            negative: negative,
+                            chargedPercent: (charged * 100 / length).toFixed(1)
+                        });
+                    }
+                } else {
+                    i++;
+                }
+            }
+            
+            // Count sheets
+            i = 0;
+            while (i < n) {
+                if (residues[i].secStruct === 'E') {
+                    var start = i;
+                    var length = 0;
+                    var charged = 0, positive = 0, negative = 0;
+                    
+                    while (i < n && residues[i].secStruct === 'E') {
+                        length++;
+                        var aa = residues[i].resName;
+                        if (POSITIVE.indexOf(aa) !== -1) { charged++; positive++; }
+                        else if (NEGATIVE.indexOf(aa) !== -1) { charged++; negative++; }
+                        i++;
+                    }
+                    
+                    if (length >= 3) {
+                        data.sheets.push({
+                            length: length,
+                            start: residues[start].resNum,
+                            end: residues[i - 1].resNum,
+                            charged: charged,
+                            positive: positive,
+                            negative: negative,
+                            chargedPercent: (charged * 100 / length).toFixed(1)
+                        });
+                    }
+                } else {
+                    i++;
+                }
+            }
+            
+            // Count coil and other
+            data.totalHelixRes = residues.filter(r => r.secStruct === 'H').length;
+            data.totalSheetRes = residues.filter(r => r.secStruct === 'E').length;
+            data.totalTurnRes = residues.filter(r => r.secStruct === 'T').length;
+            data.totalCoilRes = residues.filter(r => r.secStruct === 'C').length;
+        }
+        
+        function analyzeSequence(seq, id, source) {
+            var map = {
+                'A':'ALA','R':'ARG','N':'ASN','D':'ASP','C':'CYS','Q':'GLN','E':'GLU','G':'GLY',
+                'H':'HIS','I':'ILE','L':'LEU','K':'LYS','M':'MET','F':'PHE','P':'PRO','S':'SER',
+                'T':'THR','W':'TRP','Y':'TYR','V':'VAL'
+            };
+            
+            var residues = [];
+            for (var i = 0; i < seq.length; i++) {
+                var aa = map[seq[i]];
+                if (aa) {
+                    residues.push({seqIndex: i, resNum: i+1, resName: aa});
+                }
+            }
+            
+            var data = {
+                proteinId: id,
+                source: source,
+                totalResidues: residues.length,
+                residues: residues,
+                aminoAcidCount: {},
+                charged: 0,
+                polar: 0,
+                nonpolar: 0,
+                positive: 0,
+                negative: 0
+            };
+            
+            for (var i = 0; i < residues.length; i++) {
+                var aa = residues[i].resName;
+                data.aminoAcidCount[aa] = (data.aminoAcidCount[aa] || 0) + 1;
+                
+                if (POSITIVE.indexOf(aa) !== -1) {
+                    data.charged++;
+                    data.positive++;
+                } else if (NEGATIVE.indexOf(aa) !== -1) {
+                    data.charged++;
+                    data.negative++;
+                } else if (POLAR.indexOf(aa) !== -1) {
+                    data.polar++;
+                } else if (NONPOLAR.indexOf(aa) !== -1) {
+                    data.nonpolar++;
+                }
+            }
+            
+            data.netCharge = data.positive - data.negative;
+            return data;
+        }
+        
+        function displayResults(data, isStruct, pdbData) {
+            document.getElementById('results').style.display = 'block';
+            
+            var info = '<h3>' + data.proteinId;
+            if (data.source) info += ' (' + data.source + ')';
+            info += '</h3>';
+            if (data.header) info += '<p><strong>Type:</strong> ' + data.header + '</p>';
+            if (data.title) info += '<p><strong>Title:</strong> ' + data.title + '</p>';
+            document.getElementById('proteinInfo').innerHTML = info;
+            
+            document.getElementById('viewerCard').style.display = isStruct ? 'block' : 'none';
+            document.getElementById('secStructCard').style.display = isStruct ? 'block' : 'none';
+            
+            makePieChart(data);
+            makeStats(data, isStruct);
+            makeAACount(data);
+            
+            if (isStruct) {
+                makeSecStruct(data);
+                if (pdbData) make3D(pdbData);
+            }
+        }
+        
+        function makePieChart(data) {
+            var ctx = document.getElementById('pieChart').getContext('2d');
+            if (pieChart) pieChart.destroy();
+            
+            var total = data.nonpolar + data.polar + data.positive + data.negative;
+            
+            pieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Non-polar', 'Polar', 'Positive', 'Negative'],
+                    datasets: [{
+                        data: [data.nonpolar, data.polar, data.positive, data.negative],
+                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    var label = context.label || '';
+                                    var value = context.parsed;
+                                    var percent = ((value / total) * 100).toFixed(1);
+                                    return label + ': ' + value + ' (' + percent + '%)';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function makeStats(data, isStruct) {
+            var h = '<table><tr><th>Property</th><th>Value</th></tr>';
+            h += '<tr><td>Total residues</td><td>' + data.totalResidues + '</td></tr>';
+            h += '<tr><td>Charged residues</td><td>' + data.charged + '</td></tr>';
+            h += '<tr><td>Polar residues</td><td>' + data.polar + '</td></tr>';
+            h += '<tr><td>Non-polar residues</td><td>' + data.nonpolar + '</td></tr>';
+            h += '<tr><td>Net charge</td><td>' + data.netCharge + '</td></tr>';
+            
+            if (isStruct && data.helices) {
+                h += '<tr><td>Number of α-helices</td><td>' + data.helices.length + '</td></tr>';
+                h += '<tr><td>Residues in α-helices</td><td>' + data.totalHelixRes + '</td></tr>';
+                h += '<tr><td>Number of β-sheets</td><td>' + data.sheets.length + '</td></tr>';
+                h += '<tr><td>Residues in β-sheets</td><td>' + data.totalSheetRes + '</td></tr>';
+                h += '<tr><td>Residues in turns</td><td>' + data.totalTurnRes + '</td></tr>';
+                h += '<tr><td>Residues in coils</td><td>' + data.totalCoilRes + '</td></tr>';
+            }
+            
+            h += '</table>';
+            document.getElementById('proteinStats').innerHTML = h;
+        }
+        
+        function makeAACount(data) {
+            var h = '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px;">';
+            var keys = Object.keys(data.aminoAcidCount).sort();
+            for (var i = 0; i < keys.length; i++) {
+                var aa = keys[i];
+                h += '<div style="padding: 8px; background: #f8f9fa; border-radius: 5px;"><strong>' + aa + ':</strong> ' + data.aminoAcidCount[aa] + '</div>';
+            }
+            h += '</div>';
+            document.getElementById('aminoAcidCount').innerHTML = h;
+        }
+        
+        function makeSecStruct(data) {
+            var h = '<h4>α-Helices</h4>';
+            
+            if (data.helices.length === 0) {
+                h += '<p style="text-align: center; padding: 20px; color: #999;">No helices detected</p>';
+            } else {
+                h += '<table><tr><th>#</th><th>Length</th><th>Position</th><th>Charged</th><th>+</th><th>-</th><th>% Charged</th></tr>';
+                for (var i = 0; i < data.helices.length; i++) {
+                    var s = data.helices[i];
+                    h += '<tr class="helix"><td>' + (i+1) + '</td><td>' + s.length + '</td><td>' + s.start + '-' + s.end + '</td>';
+                    h += '<td>' + s.charged + '</td><td>' + s.positive + '</td><td>' + s.negative + '</td><td>' + s.chargedPercent + '%</td></tr>';
+                }
+                h += '</table>';
+            }
+            
+            h += '<h4 style="margin-top:20px">β-Sheets</h4>';
+            
+            if (data.sheets.length === 0) {
+                h += '<p style="text-align: center; padding: 20px; color: #999;">No sheets detected</p>';
+            } else {
+                h += '<table><tr><th>#</th><th>Length</th><th>Position</th><th>Charged</th><th>+</th><th>-</th><th>% Charged</th></tr>';
+                for (var i = 0; i < data.sheets.length; i++) {
+                    var s = data.sheets[i];
+                    h += '<tr class="sheet"><td>' + (i+1) + '</td><td>' + s.length + '</td><td>' + s.start + '-' + s.end + '</td>';
+                    h += '<td>' + s.charged + '</td><td>' + s.positive + '</td><td>' + s.negative + '</td><td>' + s.chargedPercent + '%</td></tr>';
+                }
+                h += '</table>';
+            }
+            
+            document.getElementById('secStructTable').innerHTML = h;
+        }
+        
+        function make3D(pdbData) {
+            var element = document.getElementById('viewer');
+            if (viewer) {
+                viewer.clear();
+            }
+            
+            viewer = $3Dmol.createViewer(element, {backgroundColor: 'black'});
+            viewer.addModel(pdbData, 'pdb');
+            viewer.setStyle({}, {cartoon: {color: 'spectrum'}});
+            viewer.zoomTo();
+            viewer.render();
+        }
+        
+        function setStyle(style) {
+            if (!viewer) return;
+            viewer.setStyle({}, {});
+            
+            if (style === 'cartoon') {
+                viewer.setStyle({}, {cartoon: {color: 'spectrum'}});
+            } else if (style === 'stick') {
+                viewer.setStyle({}, {stick: {colorscheme: 'chainHetatm'}});
+            } else if (style === 'sphere') {
+                viewer.setStyle({}, {sphere: {colorscheme: 'chainHetatm'}});
+            } else if (style === 'line') {
+                viewer.setStyle({}, {line: {colorscheme: 'chainHetatm'}});
+            } else if (style === 'surface') {
+                viewer.addSurface($3Dmol.SurfaceType.VDW, {
+                    opacity: 0.8,
+                    colorscheme: 'whiteCarbon'
+                });
+            }
+            
+            viewer.render();
+        }
+        
+        function toggleSurface() {
+            if (!viewer) return;
+            
+            if (surfaceShown) {
+                viewer.removeAllSurfaces();
+                surfaceShown = false;
+            } else {
+                viewer.addSurface($3Dmol.SurfaceType.VDW, {
+                    opacity: 0.7,
+                    colorscheme: 'whiteCarbon'
+                });
+                surfaceShown = true;
+            }
+            viewer.render();
+        }
+        
+        function resetView() {
+            if (!viewer) return;
+            viewer.zoomTo();
+            viewer.render();
+        }
+        
+        function showError(msg) {
+            document.getElementById('results').innerHTML = '<div class="error"><strong>Error:</strong> ' + msg + '</div>';
+            document.getElementById('results').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
