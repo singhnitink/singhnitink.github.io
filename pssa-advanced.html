@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Protein Structure and Sequence Analyser (PSSA) - Advanced</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/3dmol@latest/build/3Dmol-min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <style>
@@ -12,211 +15,262 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', sans-serif;
+            background: #f1f0ed;
             min-height: 100vh;
             padding: 20px;
+            color: #1e293b;
         }
-        
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
             overflow: hidden;
         }
-        
+
         header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px;
+            background: #1e293b;
+            color: #f8fafc;
+            padding: 36px 40px;
             text-align: center;
         }
-        
+
         header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: -0.02em;
         }
-        
+
+        header p {
+            color: #94a3b8;
+            font-size: 0.95em;
+            font-weight: 400;
+        }
+
         .input-section {
-            padding: 40px;
+            padding: 32px 40px;
             background: #f8f9fa;
+            border-bottom: 1px solid #e2e8f0;
         }
-        
+
         .input-group {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             max-width: 800px;
             margin: 0 auto;
             flex-wrap: wrap;
             justify-content: center;
         }
-        
+
         select, input {
-            padding: 15px;
-            font-size: 16px;
-            border: 2px solid #dee2e6;
-            border-radius: 8px;
+            padding: 12px 14px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            background: #fff;
+            color: #1e293b;
+            transition: border-color 0.15s ease;
         }
-        
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #0d9488;
+            box-shadow: 0 0 0 3px rgba(13,148,136,0.12);
+        }
+
         select { flex: 0 0 150px; }
         input { flex: 1; min-width: 200px; }
-        
+
         button {
-            padding: 15px 40px;
-            font-size: 16px;
-            font-weight: bold;
-            color: white;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 12px 32px;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            color: #fff;
+            background: #1e293b;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
+            transition: background 0.15s ease;
         }
-        
-        button:hover:not(:disabled) { opacity: 0.9; }
-        button:disabled { opacity: 0.5; cursor: not-allowed; }
-        
+
+        button:hover:not(:disabled) {
+            background: #334155;
+        }
+
+        button:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
         .loading {
             text-align: center;
             padding: 40px;
             display: none;
+            color: #475569;
         }
-        
+
         .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #667eea;
+            border: 3px solid #e2e8f0;
+            border-top: 3px solid #0d9488;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
+            width: 40px;
+            height: 40px;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 16px;
         }
-        
+
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
+
         .results {
-            padding: 40px;
+            padding: 32px 40px;
             display: none;
         }
-        
+
         .result-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-top: 30px;
+            gap: 24px;
+            margin-top: 24px;
         }
-        
+
         .card {
-            background: white;
-            border: 1px solid #dee2e6;
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 24px;
         }
-        
+
         .card h3 {
-            color: #667eea;
-            margin-bottom: 20px;
-            font-size: 1.4em;
-            border-bottom: 2px solid #667eea;
+            color: #1e293b;
+            margin-bottom: 16px;
+            font-size: 1.15em;
+            font-weight: 600;
+            border-bottom: 2px solid #0d9488;
             padding-bottom: 10px;
         }
-        
+
         .viewer-container {
             grid-column: 1 / -1;
         }
-        
+
         #viewer {
             width: 100%;
             height: 500px;
-            border-radius: 10px;
-            background: #000;
+            border-radius: 8px;
+            background: #0f172a;
             position: relative;
         }
-        
+
         .viewer-controls {
             display: flex;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 8px;
+            margin-top: 12px;
             flex-wrap: wrap;
         }
-        
+
         .viewer-controls button {
-            padding: 8px 16px;
-            font-size: 14px;
+            padding: 7px 14px;
+            font-size: 13px;
             flex: 0 0 auto;
+            background: #334155;
         }
-        
+
+        .viewer-controls button:hover {
+            background: #475569;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 15px;
+            margin-top: 12px;
+            font-size: 0.88em;
+        }
+
+        th, td {
+            padding: 9px 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: #475569;
+            text-transform: uppercase;
+            font-size: 0.78em;
+            letter-spacing: 0.04em;
+        }
+
+        tr:hover { background: #f8fafc; }
+
+        .helix { background-color: #ddd6fe !important; }
+        .sheet { background-color: #fde68a !important; }
+        .turn { background-color: #bbf7d0 !important; }
+        .bridge { background-color: #bae6fd !important; }
+
+        .error {
+            background: #fef2f2;
+            color: #991b1b;
+            padding: 16px 20px;
+            border-radius: 6px;
+            border: 1px solid #fecaca;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+
+        .info-box {
+            background: #f0fdfa;
+            color: #134e4a;
+            padding: 12px 16px;
+            border-radius: 6px;
+            border: 1px solid #99f6e4;
+            margin: 16px auto 0;
+            max-width: 800px;
             font-size: 0.9em;
         }
-        
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #dee2e6;
-        }
-        
-        th {
-            background: #f8f9fa;
-            font-weight: bold;
-            color: #495057;
-        }
-        
-        tr:hover { background: #f8f9fa; }
-        
-        .helix { background-color: #CC99FF !important; }
-        .sheet { background-color: #FFD966 !important; }
-        .turn { background-color: #C5E1A5 !important; }
-        .bridge { background-color: #B3E5FC !important; }
-        
-        .error {
-            background: #f8d7da;
-            color: #721c24;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-        
-        .info-box {
-            background: #d1ecf1;
-            color: #0c5460;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px auto 0;
-            max-width: 800px;
-        }
-        
+
         .warning-box {
-            background: #fff3cd;
-            color: #856404;
-            padding: 15px;
-            border-radius: 8px;
+            background: #fffbeb;
+            color: #92400e;
+            padding: 12px 16px;
+            border-radius: 6px;
+            border: 1px solid #fde68a;
             margin: 10px 0;
+            font-size: 0.9em;
         }
-        
+
         .full-width { grid-column: 1 / -1; }
-        
+
         footer {
-            background: #343a40;
-            color: white;
+            background: #1e293b;
+            color: #94a3b8;
             text-align: center;
             padding: 20px;
+            font-size: 0.88em;
         }
-        
+
+        footer p + p {
+            margin-top: 4px;
+        }
+
         @media (max-width: 900px) {
             .result-grid {
                 grid-template-columns: 1fr;
             }
+            header { padding: 28px 20px; }
+            .input-section { padding: 24px 20px; }
+            .results { padding: 24px 20px; }
         }
     </style>
 </head>
@@ -224,7 +278,7 @@
     <div class="container">
         <header>
             <h1>Protein Structure & Sequence Analyser (Advanced)</h1>
-            <p>STRIDE-based secondary structure assignment with RCSB GraphQL API</p>
+            <p>Protein secondary structure assignment with RCSB GraphQL API</p>
         </header>
         
         <div class="input-section">
@@ -244,11 +298,11 @@
         
         <div class="loading" id="loading">
             <div class="spinner"></div>
-            <p>Analyzing protein structure using STRIDE algorithm...</p>
+            <p>Analyzing protein structure...</p>
         </div>
         
         <div class="results" id="results">
-            <h2 style="color: #667eea; margin-bottom: 20px;">Analysis Results</h2>
+            <h2 style="color: #1e293b; margin-bottom: 20px; font-weight: 700;">Analysis Results</h2>
             <div id="proteinInfo"></div>
             
             <div class="result-grid">
@@ -282,14 +336,14 @@
                 </div>
                 
                 <div class="card full-width" id="secStructCard" style="display: none;">
-                    <h3>Secondary Structure (STRIDE Algorithm)</h3>
-                    <div id="secStructLegend" style="margin-bottom: 20px; padding: 15px; background: #f8f9fa; border-radius: 5px;">
+                    <h3>Secondary Structure</h3>
+                    <div id="secStructLegend" style="margin-bottom: 20px; padding: 12px 16px; background: #f8fafc; border-radius: 6px; border: 1px solid #e2e8f0; font-size: 0.9em;">
                         <strong>Legend:</strong> 
-                        <span style="background: #CC99FF; padding: 2px 8px; margin: 5px; border-radius: 3px;">H = α-Helix</span>
-                        <span style="background: #FFD966; padding: 2px 8px; margin: 5px; border-radius: 3px;">E = β-Sheet</span>
-                        <span style="background: #C5E1A5; padding: 2px 8px; margin: 5px; border-radius: 3px;">T = Turn</span>
-                        <span style="background: #B3E5FC; padding: 2px 8px; margin: 5px; border-radius: 3px;">B = Bridge</span>
-                        <span style="background: #ffffff; padding: 2px 8px; margin: 5px; border-radius: 3px;">C = Coil</span>
+                        <span style="background: #ddd6fe; padding: 2px 8px; margin: 4px; border-radius: 3px; font-size: 0.9em;">H = α-Helix</span>
+                        <span style="background: #fde68a; padding: 2px 8px; margin: 4px; border-radius: 3px; font-size: 0.9em;">E = β-Sheet</span>
+                        <span style="background: #bbf7d0; padding: 2px 8px; margin: 4px; border-radius: 3px; font-size: 0.9em;">T = Turn</span>
+                        <span style="background: #bae6fd; padding: 2px 8px; margin: 4px; border-radius: 3px; font-size: 0.9em;">B = Bridge</span>
+                        <span style="background: #f1f5f9; padding: 2px 8px; margin: 4px; border-radius: 3px; font-size: 0.9em;">C = Coil</span>
                     </div>
                     <div id="secStructTable"></div>
                 </div>
@@ -299,7 +353,7 @@
     
     <footer>
         <p>Protein Structure and Sequence Analyser | Developed by Nitin Kumar Singh</p>
-        <p style="margin-top: 10px; font-size: 0.9em;">Secondary Structure: STRIDE Algorithm | API: RCSB PDB GraphQL</p>
+        <p style="margin-top: 10px; font-size: 0.9em;">Secondary Structure: PDB Records + Phi/Psi Analysis | API: RCSB PDB</p>
     </footer>
 
     <script>
@@ -465,85 +519,14 @@
             return seq;
         }
         
-        // STRIDE-based secondary structure calculation with H-bond energy
-        function calculateSecondaryStructureAdvanced(residues) {
-            var n = residues.length;
-            var secStruct = new Array(n);
-            for (var i = 0; i < n; i++) {
-                secStruct[i] = 'C';
-            }
-            
-            // Build hydrogen bond network with energy calculation
-            var hbonds = buildHBondNetwork(residues);
-            
-            // Detect α-helices (i→i+4 H-bonds, energy < -1.5 kcal/mol)
-            for (var i = 0; i < n - 4; i++) {
-                var helixCount = 0;
-                for (var j = 0; j < 3 && i + j + 4 < n; j++) {
-                    if (hbonds[i + j] && hbonds[i + j][i + j + 4] && 
-                        hbonds[i + j][i + j + 4] < -1.5) {
-                        helixCount++;
-                    }
-                }
-                if (helixCount >= 2) {
-                    for (var j = i; j <= i + 3; j++) {
-                        if (secStruct[j] === 'C') secStruct[j] = 'H';
-                    }
-                }
-            }
-            
-            // Detect β-sheets (i→j with extended backbone)
-            for (var i = 0; i < n - 2; i++) {
-                if (secStruct[i] !== 'H') {
-                    for (var j = i + 2; j < n; j++) {
-                        if (hbonds[i] && hbonds[i][j] && hbonds[i][j] < -1.2) {
-                            if (secStruct[j] !== 'H') {
-                                secStruct[i] = 'E';
-                                secStruct[j] = 'E';
-                            }
-                        }
-                    }
-                }
-            }
-            
-            // Detect turns using distance-based criteria
-            for (var i = 0; i < n - 3; i++) {
-                if (secStruct[i] === 'C') {
-                    var d1 = distance3D(residues[i], residues[i + 3]);
-                    if (d1 < 7.0 && d1 > 4.0) {
-                        secStruct[i + 1] = 'T';
-                    }
-                }
-            }
-            
-            return secStruct;
+        // Vector math helpers
+        function vecSub(a, b) { return {x: a.x-b.x, y: a.y-b.y, z: a.z-b.z}; }
+        function vecCross(a, b) {
+            return {x: a.y*b.z - a.z*b.y, y: a.z*b.x - a.x*b.z, z: a.x*b.y - a.y*b.x};
         }
-        
-        function buildHBondNetwork(residues) {
-            var n = residues.length;
-            var hbonds = {};
-            
-            for (var i = 0; i < n; i++) {
-                hbonds[i] = {};
-            }
-            
-            for (var i = 0; i < n - 2; i++) {
-                for (var j = i + 2; j < n; j++) {
-                    var dist = distance3D(residues[i], residues[j]);
-                    
-                    // STRIDE H-bond criteria: 4.5-6.5 Å
-                    if (dist > 4.5 && dist < 6.5) {
-                        // Simplified energy: -332 * (1/r^2)
-                        var energy = -332.0 / (dist * dist);
-                        hbonds[i][j] = energy;
-                        if (!hbonds[j]) hbonds[j] = {};
-                        hbonds[j][i] = energy;
-                    }
-                }
-            }
-            
-            return hbonds;
-        }
+        function vecDot(a, b) { return a.x*b.x + a.y*b.y + a.z*b.z; }
+        function vecLen(a) { return Math.sqrt(a.x*a.x + a.y*a.y + a.z*a.z); }
+        function vecScale(a, s) { return {x: a.x*s, y: a.y*s, z: a.z*s}; }
         
         function distance3D(p1, p2) {
             var dx = p1.x - p2.x;
@@ -552,16 +535,96 @@
             return Math.sqrt(dx * dx + dy * dy + dz * dz);
         }
         
+        // Calculate dihedral angle (in degrees) for 4 points
+        function calculateDihedral(p1, p2, p3, p4) {
+            var b1 = vecSub(p2, p1);
+            var b2 = vecSub(p3, p2);
+            var b3 = vecSub(p4, p3);
+            var n1 = vecCross(b1, b2);
+            var n2 = vecCross(b2, b3);
+            var b2len = vecLen(b2);
+            if (b2len < 0.001) return null;
+            var b2unit = vecScale(b2, 1.0 / b2len);
+            var m = vecCross(n1, b2unit);
+            var x = vecDot(n1, n2);
+            var y = vecDot(m, n2);
+            return -Math.atan2(y, x) * 180.0 / Math.PI;
+        }
+        
+        // Secondary structure from backbone phi/psi dihedral angles (Ramachandran classification)
+        function calculateSecondaryStructurePhiPsi(residues) {
+            var n = residues.length;
+            var secStruct = new Array(n);
+            for (var i = 0; i < n; i++) secStruct[i] = 'C';
+            
+            // Calculate phi/psi and classify per residue
+            for (var i = 0; i < n; i++) {
+                var phi = null, psi = null;
+                
+                // phi = dihedral(C[i-1], N[i], CA[i], C[i])
+                if (i > 0 && residues[i-1].atomC && residues[i].atomN && residues[i].atomCA && residues[i].atomC) {
+                    phi = calculateDihedral(residues[i-1].atomC, residues[i].atomN, residues[i].atomCA, residues[i].atomC);
+                }
+                // psi = dihedral(N[i], CA[i], C[i], N[i+1])
+                if (i < n-1 && residues[i].atomN && residues[i].atomCA && residues[i].atomC && residues[i+1].atomN) {
+                    psi = calculateDihedral(residues[i].atomN, residues[i].atomCA, residues[i].atomC, residues[i+1].atomN);
+                }
+                
+                if (phi !== null && psi !== null) {
+                    // Alpha-helix region: phi ~ -60, psi ~ -47
+                    if (phi >= -120 && phi <= -30 && psi >= -80 && psi <= 0) {
+                        secStruct[i] = 'H';
+                    }
+                    // Beta-sheet region: phi ~ -120, psi ~ 130
+                    else if (phi >= -180 && phi <= -60 && (psi >= 80 || psi <= -150)) {
+                        secStruct[i] = 'E';
+                    }
+                }
+            }
+            
+            // Enforce minimum lengths: helices >= 4 residues, sheets >= 2 residues
+            var i = 0;
+            while (i < n) {
+                if (secStruct[i] === 'H') {
+                    var start = i;
+                    while (i < n && secStruct[i] === 'H') i++;
+                    if (i - start < 4) {
+                        for (var j = start; j < i; j++) secStruct[j] = 'C';
+                    }
+                } else if (secStruct[i] === 'E') {
+                    var start = i;
+                    while (i < n && secStruct[i] === 'E') i++;
+                    if (i - start < 2) {
+                        for (var j = start; j < i; j++) secStruct[j] = 'C';
+                    }
+                } else {
+                    i++;
+                }
+            }
+            
+            // Detect turns: short coil regions (1-3 residues) between α/β elements
+            // and positions with Cα(i)-Cα(i+3) distance < 7 Å
+            for (i = 0; i < n - 3; i++) {
+                if (secStruct[i] === 'C') {
+                    var d = distance3D(residues[i], residues[i + 3]);
+                    if (d < 7.0 && d > 3.0) {
+                        // Mark the middle residues as turn if they are coil
+                        if (secStruct[i+1] === 'C') secStruct[i+1] = 'T';
+                        if (secStruct[i+2] === 'C') secStruct[i+2] = 'T';
+                    }
+                }
+            }
+            
+            return secStruct;
+        }
+        
         function parsePDB(pdbData, pdbId) {
             var lines = pdbData.split('\n');
-            var residues = [];
-            var seen = {};
             var header = '';
             var title = '';
             var helices = [];
             var sheets = [];
             var turns = [];
-            var bridges = [];
             
             // Parse HEADER and TITLE
             for (var i = 0; i < lines.length; i++) {
@@ -574,7 +637,7 @@
                 }
             }
             
-            // Parse HELIX, SHEET, TURN, SSBOND records
+            // Parse HELIX, SHEET, TURN records
             for (var i = 0; i < lines.length; i++) {
                 var line = lines[i];
                 if (line.indexOf('HELIX') === 0) {
@@ -594,40 +657,67 @@
                 }
             }
             
-            // Parse ATOM records (CA only)
-            var sequentialIndex = 0;
+            // Parse backbone atoms: N, CA, C per residue (first model only)
+            var backboneAtoms = {};
+            var residueOrder = [];
+            var seenCA = {};
+            var inFirstModel = true;
+            
             for (var i = 0; i < lines.length; i++) {
                 var line = lines[i];
+                // Only parse first model for NMR structures
+                if (line.indexOf('MODEL') === 0 && residueOrder.length > 0) break;
+                if (line.indexOf('ENDMDL') === 0 && residueOrder.length > 0) break;
+                
                 if (line.indexOf('ATOM') === 0) {
                     var atomName = line.substring(12, 16).trim();
-                    if (atomName === 'CA') {
+                    if (atomName === 'N' || atomName === 'CA' || atomName === 'C') {
                         var resName = line.substring(17, 20).trim();
+                        var chainId = line.substring(21, 22);
                         var resNum = parseInt(line.substring(22, 26).trim());
                         var x = parseFloat(line.substring(30, 38).trim());
                         var y = parseFloat(line.substring(38, 46).trim());
                         var z = parseFloat(line.substring(46, 54).trim());
                         
-                        var key = resNum + '_' + resName;
-                        if (!seen[key]) {
-                            seen[key] = true;
-                            residues.push({
-                                seqIndex: sequentialIndex,
-                                resNum: resNum,
-                                resName: resName,
-                                x: x, y: y, z: z
-                            });
-                            sequentialIndex++;
+                        var key = chainId + '_' + resNum;
+                        if (!backboneAtoms[key]) {
+                            backboneAtoms[key] = {resName: resName, resNum: resNum, chainId: chainId};
+                        }
+                        if (!backboneAtoms[key][atomName]) {
+                            backboneAtoms[key][atomName] = {x: x, y: y, z: z};
+                        }
+                        if (atomName === 'CA' && !seenCA[key]) {
+                            seenCA[key] = true;
+                            residueOrder.push(key);
                         }
                     }
                 }
             }
             
-            // Assign secondary structure from PDB records or calculate
+            // Build residues array with backbone atom coordinates
+            var residues = [];
+            for (var i = 0; i < residueOrder.length; i++) {
+                var key = residueOrder[i];
+                var atoms = backboneAtoms[key];
+                if (atoms.CA) {
+                    residues.push({
+                        seqIndex: i,
+                        resNum: atoms.resNum,
+                        resName: atoms.resName,
+                        x: atoms.CA.x, y: atoms.CA.y, z: atoms.CA.z,
+                        atomN: atoms.N || null,
+                        atomCA: atoms.CA,
+                        atomC: atoms.C || null
+                    });
+                }
+            }
+            
+            // Assign secondary structure: PDB records first, phi/psi fallback
             var secStruct;
             if (helices.length > 0 || sheets.length > 0) {
                 secStruct = assignSecStructFromRecords(residues, helices, sheets, turns);
             } else {
-                secStruct = calculateSecondaryStructureAdvanced(residues);
+                secStruct = calculateSecondaryStructurePhiPsi(residues);
             }
             
             for (var i = 0; i < residues.length; i++) {
