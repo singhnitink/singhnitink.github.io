@@ -237,8 +237,13 @@
             background: rgba(255, 255, 255, 0.35);
         }
 
-        .slideshow-arrow.prev { left: 8px; }
-        .slideshow-arrow.next { right: 8px; }
+        .slideshow-arrow.prev {
+            left: 8px;
+        }
+
+        .slideshow-arrow.next {
+            right: 8px;
+        }
     </style>
 </head>
 
@@ -300,10 +305,12 @@
                     <div class="slideshow" id="heroSlideshow">
                         <div class="slideshow-slide active" data-type="image">
                             <img src="media/membrane_transport.png" alt="Membrane Transport Mechanisms">
-                            <div class="slideshow-caption">Membrane transport: passive diffusion &amp; active transport</div>
+                            <div class="slideshow-caption">Membrane transport: passive diffusion &amp; active transport
+                            </div>
                         </div>
                         <div class="slideshow-slide" data-type="image">
-                            <img src="media/TOC_12_image17_copy_1.png" alt="Membrane Structure and Dynamics in Zymomonas mobilis">
+                            <img src="media/TOC_12_image17_copy_1.png"
+                                alt="Membrane Structure and Dynamics in Zymomonas mobilis">
                             <div class="slideshow-caption">Membrane structure &amp; dynamics in Zymomonas mobilis</div>
                         </div>
                         <div class="slideshow-slide" data-type="image">
@@ -320,7 +327,8 @@
                         </div>
                         <div class="slideshow-slide" data-type="video">
                             <video src="media/Memb_protein.mp4" muted loop preload="metadata"></video>
-                            <div class="slideshow-caption">Plant protein &amp; thylakoid membrane MD simulation (video)</div>
+                            <div class="slideshow-caption">Plant protein &amp; thylakoid membrane MD simulation (video)
+                            </div>
                         </div>
                         <button class="slideshow-arrow prev" aria-label="Previous slide">&#8249;</button>
                         <button class="slideshow-arrow next" aria-label="Next slide">&#8250;</button>
@@ -334,22 +342,30 @@
                         <details open>
                             <summary>Current Position</summary>
                             <p>
-                                I am a <strong>Postdoctoral Researcher</strong> at <strong>Michigan State
+                                Since <strong>November 2024</strong>, I am a <strong>Postdoctoral Researcher</strong> at <strong>Michigan State
                                     University</strong>, supervised by <strong>Dr. Josh Vermaas</strong>. My work
-                                focuses on <strong>molecular simulations</strong>, <strong>computational
-                                    chemistry/biology</strong>, and <strong>machine learning</strong> to address
-                                challenges in <strong>drug discovery</strong> and <strong>biofuel production</strong>.
+                                integrates high-performance <strong>molecular simulations</strong>, <strong>computational
+                                    chemistry/biology</strong>, and <strong>machine learning</strong> to address critical challenges in 
+                                <strong>drug discovery</strong>, <strong>membrane transport dynamics</strong>, and <strong>biofuel production</strong>.
                             </p>
                         </details>
 
                         <details>
-                            <summary>Ph.D. and Research Background</summary>
+                            <summary>Ph.D. and Research Background (July 2019 – November 2024)</summary>
                             <p>
-                                I completed my <strong>Ph.D. in Chemical Engineering</strong> at <strong>IIT
-                                    Gandhinagar</strong> under <strong>Dr. Mithun Radhakrishna</strong>. My dissertation
-                                explored the role of <em>charged residues</em> in <em>protein structural dynamics</em>
-                                and <em>adsorption</em>.
+                                I completed my <strong>Ph.D. in Chemical Engineering</strong> from <strong>IIT
+                                    Gandhinagar</strong> (July 2019 – November 2024) under <strong>Dr. Mithun Radhakrishna</strong>. My dissertation 
+                                and research established strong expertise in <strong>computational chemistry</strong>, <strong>advanced molecular simulations</strong>, 
+                                and <strong>data analysis</strong>.
                             </p>
+                            <p class="mt-2">
+                                Key areas of my doctoral work include:
+                            </p>
+                            <ul class="list-disc list-inside mt-2 space-y-1">
+                                <li><strong>Helical Stability:</strong> Probing the structural dynamics and stability of charged peptides.</li>
+                                <li><strong>Protein Orientation:</strong> Investigating and tuning electrostatic interactions to control the adsorption orientation of proteins (e.g., GFP) on charged surfaces.</li>
+                                <li><strong>Scientific Software:</strong> Designing and implementing statistical models and predictive algorithms for protein sequence/structure analysis.</li>
+                            </ul>
                         </details>
 
                         <details>
@@ -367,7 +383,8 @@
                                     Predicts intrinsically disordered regions based on hydrophobicity.
                                 </li>
                                 <li>
-                                    <a href="https://singhnitink.github.io/LigPlot3D/" target="_blank"><strong>LigPlot3D</strong></a>:
+                                    <a href="https://singhnitink.github.io/LigPlot3D/"
+                                        target="_blank"><strong>LigPlot3D</strong></a>:
                                     Interactive 3D visualization of protein-ligand interactions from PDB structures.
                                 </li>
                             </ul>
@@ -450,7 +467,8 @@
             <h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Publications</h2>
             <div class="space-y-6">
                 <div class="bg-white rounded-lg shadow-md p-5 md:p-6 paper-entry">
-                    <h3 class="text-lg md:text-xl font-semibold text-gray-800 mb-1">Evaluating the Transport Mechanism for
+                    <h3 class="text-lg md:text-xl font-semibold text-gray-800 mb-1">Evaluating the Transport Mechanism
+                        for
                         Lignocellulosic Inhibitors in Zymomonas mobilis</h3>
                     <p class="text-sm md:text-base text-gray-600 italic">Nitin Kumar Singh, and J. Vermaas.</p>
                     <p class="text-sm md:text-base text-gray-700 mt-1">ACS Sustainable Chemistry &amp; Engineering
@@ -553,56 +571,95 @@
                 <!-- Project 1 -->
                 <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-2">
-                        <h3 class="text-2xl font-bold text-gray-800">De Novo Mini Binder Design (RFdiffusion + ProteinMPNN)</h3>
+                        <h3 class="text-2xl font-bold text-gray-800">De Novo Mini Binder Design (RFdiffusion +
+                            ProteinMPNN)</h3>
                         <a href="https://github.com/singhnitink/Binder_design" target="_blank"
                             class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md shadow-sm transition-colors">
                             View Repository
                         </a>
                     </div>
                     <p class="text-gray-700 mb-4 leading-relaxed">
-                        An end-to-end deep learning pipeline to generate de novo mini-protein binders against human PD-L1.
-                        By integrating generative diffusion models, inverse folding networks, and alignment-free folding prediction, 
+                        An end-to-end deep learning pipeline to generate de novo mini-protein binders against human
+                        PD-L1.
+                        By integrating generative diffusion models, inverse folding networks, and alignment-free folding
+                        prediction,
                         the workflow designs high-specificity protein candidates targeting known structural hotspots.
                     </p>
-                    
+
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6 text-sm">
                         <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
                             <h4 class="font-semibold text-gray-800 mb-2">Deep Learning Frameworks Used:</h4>
                             <ul class="list-disc list-inside space-y-1 text-gray-600">
-                                <li><strong>RFdiffusion</strong>: Generative diffusion modeling for structural backbone generation</li>
-                                <li><strong>ProteinMPNN</strong>: Neural network-based inverse folding for sequence design</li>
-                                <li><strong>ESMFold</strong>: Large language model (LLM) for alignment-free structure validation</li>
+                                <li><strong>RFdiffusion</strong>: Generative diffusion modeling for structural backbone
+                                    generation</li>
+                                <li><strong>ProteinMPNN</strong>: Neural network-based inverse folding for sequence
+                                    design</li>
+                                <li><strong>ESMFold</strong>: Large language model (LLM) for alignment-free structure
+                                    validation</li>
                             </ul>
                         </div>
                         <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
                             <h4 class="font-semibold text-gray-800 mb-2">Key Assessment Metrics:</h4>
                             <ul class="list-disc list-inside space-y-1 text-gray-600">
                                 <li><strong>pLDDT &gt; 80</strong>: Confidence filter for structural fold stability</li>
-                                <li><strong>Cα RMSD &lt; 2.0 Å</strong>: Fit metric comparing predicted structures against backbones</li>
+                                <li><strong>Cα RMSD &lt; 2.0 Å</strong>: Fit metric comparing predicted structures
+                                    against backbones</li>
                                 <li><strong>Exploratory MD</strong>: Rotamer and contact persistence in OpenMM</li>
                             </ul>
                         </div>
                     </div>
 
                     <details class="mt-4 border border-gray-200 rounded-lg bg-slate-50 transition-all overflow-hidden">
-                        <summary class="text-sm font-semibold text-blue-600 hover:text-blue-800 cursor-pointer p-4 bg-gray-50 select-none">
+                        <summary
+                            class="text-sm font-semibold text-blue-600 hover:text-blue-800 cursor-pointer p-4 bg-gray-50 select-none">
                             Show De Novo Design Workflow Diagram
                         </summary>
                         <div class="p-6 bg-white border-t border-gray-100 flex justify-center overflow-x-auto">
                             <!-- Minimalist Academic Flowchart -->
                             <svg width="680" height="130" viewBox="0 0 680 130" class="max-w-full">
                                 <defs>
-                                    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                                        <path d="M 0 1 L 10 5 L 0 9" fill="none" stroke="#475569" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6"
+                                        markerHeight="6" orient="auto-start-reverse">
+                                        <path d="M 0 1 L 10 5 L 0 9" fill="none" stroke="#475569" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
                                     </marker>
                                 </defs>
                                 <style>
-                                    .node-text { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; font-size: 11px; fill: #1e293b; }
-                                    .node-bold { font-weight: 600; }
-                                    .sub-text { font-size: 9px; fill: #64748b; }
-                                    .arrow-line { stroke: #64748b; stroke-width: 1.5; fill: none; }
-                                    .box-style { fill: #f8fafc; stroke: #475569; stroke-width: 1.5; rx: 4px; }
-                                    .input-style { fill: #f1f5f9; stroke: #64748b; stroke-width: 1.2; stroke-dasharray: 3 3; rx: 4px; }
+                                    .node-text {
+                                        font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+                                        font-size: 11px;
+                                        fill: #1e293b;
+                                    }
+
+                                    .node-bold {
+                                        font-weight: 600;
+                                    }
+
+                                    .sub-text {
+                                        font-size: 9px;
+                                        fill: #64748b;
+                                    }
+
+                                    .arrow-line {
+                                        stroke: #64748b;
+                                        stroke-width: 1.5;
+                                        fill: none;
+                                    }
+
+                                    .box-style {
+                                        fill: #f8fafc;
+                                        stroke: #475569;
+                                        stroke-width: 1.5;
+                                        rx: 4px;
+                                    }
+
+                                    .input-style {
+                                        fill: #f1f5f9;
+                                        stroke: #64748b;
+                                        stroke-width: 1.2;
+                                        stroke-dasharray: 3 3;
+                                        rx: 4px;
+                                    }
                                 </style>
 
                                 <!-- Column 1: Input -->
@@ -634,9 +691,11 @@
 
                                 <!-- Column 4: Validation -->
                                 <rect x="490" y="35" width="150" height="55" class="box-style" />
-                                <text x="565" y="52" class="node-text node-bold" text-anchor="middle">ESMFold Validation</text>
+                                <text x="565" y="52" class="node-text node-bold" text-anchor="middle">ESMFold
+                                    Validation</text>
                                 <text x="565" y="67" class="sub-text" text-anchor="middle">Recapitulation Filter</text>
-                                <text x="565" y="78" class="sub-text" text-anchor="middle">RMSD &lt; 2.0Å | pLDDT &gt; 80</text>
+                                <text x="565" y="78" class="sub-text" text-anchor="middle">RMSD &lt; 2.0Å | pLDDT &gt;
+                                    80</text>
                             </svg>
                         </div>
                     </details>
@@ -645,52 +704,64 @@
                 <!-- Project 2 -->
                 <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-2">
-                        <h3 class="text-2xl font-bold text-gray-800">AlphaFold3 Structural Docking Pipeline (AutoDock Vina)</h3>
+                        <h3 class="text-2xl font-bold text-gray-800">AlphaFold3 Structural Docking Pipeline (AutoDock
+                            Vina)</h3>
                         <a href="https://github.com/singhnitink/docking1" target="_blank"
                             class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md shadow-sm transition-colors">
                             View Repository
                         </a>
                     </div>
                     <p class="text-gray-700 mb-4 leading-relaxed">
-                        A robust, automated pipeline to compute thermodynamic binding affinities of protein-ligand complexes predicted by AlphaFold3.
-                        The system parses AlphaFold3-formatted JSON structures, reconstructs coordinate files, parameterizes receptor/ligand targets, 
+                        A robust, automated pipeline to compute thermodynamic binding affinities of protein-ligand
+                        complexes predicted by AlphaFold3.
+                        The system parses AlphaFold3-formatted JSON structures, reconstructs coordinate files,
+                        parameterizes receptor/ligand targets,
                         automatically sets optimal search spaces, and schedules parallel docking simulations.
                     </p>
-                    
+
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6 text-sm">
                         <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
                             <h4 class="font-semibold text-gray-800 mb-2">Automated Preparation:</h4>
                             <ul class="list-disc list-inside space-y-1 text-gray-600">
-                                <li><strong>OpenBabel Integration</strong>: Reconstructs 3D coordinates from SMILES codes</li>
-                                <li><strong>Polar Hydrogen Addition</strong>: Sets correct protonation states for receptor &amp; ligand</li>
-                                <li><strong>Autogrid Alignment</strong>: Dynamically bounds the search grid box around the active site</li>
+                                <li><strong>OpenBabel Integration</strong>: Reconstructs 3D coordinates from SMILES
+                                    codes</li>
+                                <li><strong>Polar Hydrogen Addition</strong>: Sets correct protonation states for
+                                    receptor &amp; ligand</li>
+                                <li><strong>Autogrid Alignment</strong>: Dynamically bounds the search grid box around
+                                    the active site</li>
                             </ul>
                         </div>
                         <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
                             <h4 class="font-semibold text-gray-800 mb-2">Calculations &amp; Workflows:</h4>
                             <ul class="list-disc list-inside space-y-1 text-gray-600">
-                                <li><strong>AutoDock Vina Engine</strong>: Computes binding energy outputs in kcal/mol</li>
+                                <li><strong>AutoDock Vina Engine</strong>: Computes binding energy outputs in kcal/mol
+                                </li>
                                 <li><strong>Pose Sorting</strong>: Ranks candidate conformations by affinity scores</li>
-                                <li><strong>Reproducible Environment</strong>: Self-contained setup shell script for cloud architectures</li>
+                                <li><strong>Reproducible Environment</strong>: Self-contained setup shell script for
+                                    cloud architectures</li>
                             </ul>
                         </div>
                     </div>
 
                     <details class="mt-4 border border-gray-200 rounded-lg bg-slate-50 transition-all overflow-hidden">
-                        <summary class="text-sm font-semibold text-blue-600 hover:text-blue-800 cursor-pointer p-4 bg-gray-50 select-none">
+                        <summary
+                            class="text-sm font-semibold text-blue-600 hover:text-blue-800 cursor-pointer p-4 bg-gray-50 select-none">
                             Show Docking Pipeline Workflow Diagram
                         </summary>
                         <div class="p-6 bg-white border-t border-gray-100 flex justify-center overflow-x-auto">
                             <!-- Minimalist Academic Flowchart -->
                             <svg width="680" height="130" viewBox="0 0 680 130" class="max-w-full">
                                 <defs>
-                                    <marker id="arrow2" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                                        <path d="M 0 1 L 10 5 L 0 9" fill="none" stroke="#475569" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    <marker id="arrow2" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6"
+                                        markerHeight="6" orient="auto-start-reverse">
+                                        <path d="M 0 1 L 10 5 L 0 9" fill="none" stroke="#475569" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
                                     </marker>
                                 </defs>
                                 <!-- Column 1: AF3 JSON -->
                                 <rect x="10" y="35" width="120" height="55" class="input-style" />
-                                <text x="70" y="52" class="node-text node-bold" text-anchor="middle">AF3 Input JSON</text>
+                                <text x="70" y="52" class="node-text node-bold" text-anchor="middle">AF3 Input
+                                    JSON</text>
                                 <text x="70" y="67" class="sub-text" text-anchor="middle">Receptor Sequence</text>
                                 <text x="70" y="78" class="sub-text" text-anchor="middle">+ Ligand SMILES</text>
 
@@ -699,7 +770,8 @@
 
                                 <!-- Column 2: Prep -->
                                 <rect x="180" y="35" width="120" height="55" class="box-style" />
-                                <text x="240" y="52" class="node-text node-bold" text-anchor="middle">OpenBabel / RDKit</text>
+                                <text x="240" y="52" class="node-text node-bold" text-anchor="middle">OpenBabel /
+                                    RDKit</text>
                                 <text x="240" y="67" class="sub-text" text-anchor="middle">3D Coord Generation</text>
                                 <text x="240" y="78" class="sub-text" text-anchor="middle">Polar H+ Addition</text>
 
@@ -708,7 +780,8 @@
 
                                 <!-- Column 3: Autogrid -->
                                 <rect x="350" y="35" width="120" height="55" class="box-style" />
-                                <text x="410" y="52" class="node-text node-bold" text-anchor="middle">Autogrid Dynamic</text>
+                                <text x="410" y="52" class="node-text node-bold" text-anchor="middle">Autogrid
+                                    Dynamic</text>
                                 <text x="410" y="67" class="sub-text" text-anchor="middle">Grid Box Definition</text>
                                 <text x="410" y="78" class="sub-text" text-anchor="middle">Binding Site Center</text>
 
@@ -717,7 +790,8 @@
 
                                 <!-- Column 4: Vina -->
                                 <rect x="520" y="35" width="130" height="55" class="box-style" />
-                                <text x="585" y="52" class="node-text node-bold" text-anchor="middle">AutoDock Vina</text>
+                                <text x="585" y="52" class="node-text node-bold" text-anchor="middle">AutoDock
+                                    Vina</text>
                                 <text x="585" y="67" class="sub-text" text-anchor="middle">Conformation Search</text>
                                 <text x="585" y="78" class="sub-text" text-anchor="middle">Affinity Scoring</text>
                             </svg>
@@ -728,31 +802,37 @@
                 <!-- Project 3 -->
                 <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-2">
-                        <h3 class="text-2xl font-bold text-gray-800">HydroDisPred (Predictive Model for Protein Disorder)</h3>
+                        <h3 class="text-2xl font-bold text-gray-800">HydroDisPred (Predictive Model for Protein
+                            Disorder)</h3>
                         <a href="https://github.com/singhnitink/IDP_algorithm" target="_blank"
                             class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md shadow-sm transition-colors">
                             View Repository
                         </a>
                     </div>
                     <p class="text-gray-700 mb-4 leading-relaxed">
-                        A Python-based predictive modeling tool to identify Intrinsically Disordered Regions (IDRs) in proteins. 
-                        It evaluates physical parameters derived from sequence metrics (hydrophobic density vs net charge) 
+                        A Python-based predictive modeling tool to identify Intrinsically Disordered Regions (IDRs) in
+                        proteins.
+                        It evaluates physical parameters derived from sequence metrics (hydrophobic density vs net
+                        charge)
                         via an optimized sliding-window algorithm, outputting sequence disorderness mappings.
                     </p>
-                    
+
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6 text-sm">
                         <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
                             <h4 class="font-semibold text-gray-800 mb-2">Algorithm &amp; Parameters:</h4>
                             <ul class="list-disc list-inside space-y-1 text-gray-600">
-                                <li><strong>Feature Selection</strong>: Local charge composition &amp; nonpolar abundance</li>
-                                <li><strong>Hyperparameters</strong>: Custom sliding binsize &amp; detection cutoff threshold</li>
+                                <li><strong>Feature Selection</strong>: Local charge composition &amp; nonpolar
+                                    abundance</li>
+                                <li><strong>Hyperparameters</strong>: Custom sliding binsize &amp; detection cutoff
+                                    threshold</li>
                                 <li><strong>Binary Classifications</strong>: Dynamic sequence-state assignment</li>
                             </ul>
                         </div>
                         <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
                             <h4 class="font-semibold text-gray-800 mb-2">Applications:</h4>
                             <ul class="list-disc list-inside space-y-1 text-gray-600">
-                                <li><strong>IDP Screening</strong>: High-throughput screening of uncharacterized proteins</li>
+                                <li><strong>IDP Screening</strong>: High-throughput screening of uncharacterized
+                                    proteins</li>
                                 <li><strong>Visual Mapping</strong>: Auto-generates residue-level disorder profiles</li>
                                 <li><strong>Validation</strong>: Backed by published empirical sequence properties</li>
                             </ul>
@@ -760,20 +840,24 @@
                     </div>
 
                     <details class="mt-4 border border-gray-200 rounded-lg bg-slate-50 transition-all overflow-hidden">
-                        <summary class="text-sm font-semibold text-blue-600 hover:text-blue-800 cursor-pointer p-4 bg-gray-50 select-none">
+                        <summary
+                            class="text-sm font-semibold text-blue-600 hover:text-blue-800 cursor-pointer p-4 bg-gray-50 select-none">
                             Show HydroDisPred Workflow Diagram
                         </summary>
                         <div class="p-6 bg-white border-t border-gray-100 flex justify-center overflow-x-auto">
                             <!-- Minimalist Academic Flowchart -->
                             <svg width="680" height="130" viewBox="0 0 680 130" class="max-w-full">
                                 <defs>
-                                    <marker id="arrow3" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                                        <path d="M 0 1 L 10 5 L 0 9" fill="none" stroke="#475569" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    <marker id="arrow3" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6"
+                                        markerHeight="6" orient="auto-start-reverse">
+                                        <path d="M 0 1 L 10 5 L 0 9" fill="none" stroke="#475569" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
                                     </marker>
                                 </defs>
                                 <!-- Column 1: Input -->
                                 <rect x="10" y="35" width="120" height="55" class="input-style" />
-                                <text x="70" y="52" class="node-text node-bold" text-anchor="middle">Sequence Input</text>
+                                <text x="70" y="52" class="node-text node-bold" text-anchor="middle">Sequence
+                                    Input</text>
                                 <text x="70" y="67" class="sub-text" text-anchor="middle">Target FASTA String</text>
                                 <text x="70" y="78" class="sub-text" text-anchor="middle">Residue Array Mapping</text>
 
@@ -782,7 +866,8 @@
 
                                 <!-- Column 2: Sliding Window -->
                                 <rect x="180" y="35" width="120" height="55" class="box-style" />
-                                <text x="240" y="52" class="node-text node-bold" text-anchor="middle">Sliding Window</text>
+                                <text x="240" y="52" class="node-text node-bold" text-anchor="middle">Sliding
+                                    Window</text>
                                 <text x="240" y="67" class="sub-text" text-anchor="middle">Feature calculation</text>
                                 <text x="240" y="78" class="sub-text" text-anchor="middle">Binning parameters</text>
 
@@ -791,16 +876,20 @@
 
                                 <!-- Column 3: Evaluation -->
                                 <rect x="350" y="35" width="120" height="55" class="box-style" />
-                                <text x="410" y="52" class="node-text node-bold" text-anchor="middle">Score Computation</text>
-                                <text x="410" y="67" class="sub-text" text-anchor="middle">Charge/Hydrophobic ratio</text>
-                                <text x="410" y="78" class="sub-text" text-anchor="middle">Region disorder density</text>
+                                <text x="410" y="52" class="node-text node-bold" text-anchor="middle">Score
+                                    Computation</text>
+                                <text x="410" y="67" class="sub-text" text-anchor="middle">Charge/Hydrophobic
+                                    ratio</text>
+                                <text x="410" y="78" class="sub-text" text-anchor="middle">Region disorder
+                                    density</text>
 
                                 <!-- Arrow 3 -->
                                 <line x1="470" y1="62" x2="504" y2="62" class="arrow-line" marker-end="url(#arrow3)" />
 
                                 <!-- Column 4: Prediction -->
                                 <rect x="520" y="35" width="130" height="55" class="box-style" />
-                                <text x="585" y="52" class="node-text node-bold" text-anchor="middle">Disorder Profile</text>
+                                <text x="585" y="52" class="node-text node-bold" text-anchor="middle">Disorder
+                                    Profile</text>
                                 <text x="585" y="67" class="sub-text" text-anchor="middle">Binary sequence plot</text>
                                 <text x="585" y="78" class="sub-text" text-anchor="middle">Save disorder.png</text>
                             </svg>
@@ -825,7 +914,8 @@
 
                     <!-- AI & Protein Engineering -->
                     <div>
-                        <h3 class="text-lg font-semibold text-blue-700 mb-3 border-b pb-1">AI &amp; Protein Engineering</h3>
+                        <h3 class="text-lg font-semibold text-blue-700 mb-3 border-b pb-1">AI &amp; Protein Engineering
+                        </h3>
                         <ul class="list-disc list-inside space-y-1.5 text-sm text-gray-700">
                             <li>Fine-Tuning Protein Language Models</li>
                             <li>AlphaFold, Rosetta, RosettaFold</li>
@@ -835,7 +925,8 @@
 
                     <!-- Containerization & DevOps -->
                     <div>
-                        <h3 class="text-lg font-semibold text-blue-700 mb-3 border-b pb-1">Containerization &amp; DevOps</h3>
+                        <h3 class="text-lg font-semibold text-blue-700 mb-3 border-b pb-1">Containerization &amp; DevOps
+                        </h3>
                         <ul class="list-disc list-inside space-y-1.5 text-sm text-gray-700">
                             <li>Docker, Singularity / Apptainer</li>
                             <li>Git Version Control</li>
@@ -844,7 +935,8 @@
 
                     <!-- Cheminformatics & Data Science -->
                     <div>
-                        <h3 class="text-lg font-semibold text-blue-700 mb-3 border-b pb-1">Cheminformatics &amp; Data Science</h3>
+                        <h3 class="text-lg font-semibold text-blue-700 mb-3 border-b pb-1">Cheminformatics &amp; Data
+                            Science</h3>
                         <ul class="list-disc list-inside space-y-1.5 text-sm text-gray-700">
                             <li>RDKit, Open Babel</li>
                             <li>Pandas, NumPy</li>
@@ -854,11 +946,12 @@
 
                     <!-- Molecular Modeling & Docking -->
                     <div>
-                        <h3 class="text-lg font-semibold text-blue-700 mb-3 border-b pb-1">Molecular Modeling &amp; Simulation</h3>
+                        <h3 class="text-lg font-semibold text-blue-700 mb-3 border-b pb-1">Molecular Modeling &amp;
+                            Simulation</h3>
                         <ul class="list-disc list-inside space-y-1.5 text-sm text-gray-700">
-                            <li>GROMACS, AMBER, NAMD, LAMMPS</li>
-                            <li>OpenMM, AutoDock Vina</li>
-                            <li>HADDOCK, Packmol</li>
+                            <li>GROMACS, AMBER, NAMD, LAMMPS, OpenMM</li>
+                            <li>HADDOCK, AutoDock Vina</li>
+                            <li>Packmol</li>
                         </ul>
                     </div>
 
@@ -872,7 +965,8 @@
 
                     <!-- Free Energy & Enhanced Sampling -->
                     <div>
-                        <h3 class="text-lg font-semibold text-blue-700 mb-3 border-b pb-1">Free Energy &amp; Enhanced Sampling</h3>
+                        <h3 class="text-lg font-semibold text-blue-700 mb-3 border-b pb-1">Free Energy &amp; Enhanced
+                            Sampling</h3>
                         <ul class="list-disc list-inside space-y-1.5 text-sm text-gray-700">
                             <li>Free Energy Perturbation (FEP)</li>
                             <li>Umbrella Sampling, Metadynamics</li>
@@ -883,7 +977,8 @@
 
                     <!-- High-Performance Computing -->
                     <div>
-                        <h3 class="text-lg font-semibold text-blue-700 mb-3 border-b pb-1">High-Performance Computing</h3>
+                        <h3 class="text-lg font-semibold text-blue-700 mb-3 border-b pb-1">High-Performance Computing
+                        </h3>
                         <ul class="list-disc list-inside space-y-1.5 text-sm text-gray-700">
                             <li>Linux / Unix Administration</li>
                             <li>SLURM, PBS Schedulers</li>
@@ -893,7 +988,8 @@
 
                     <!-- Visualization & Analysis -->
                     <div>
-                        <h3 class="text-lg font-semibold text-blue-700 mb-3 border-b pb-1">Visualization &amp; Analysis</h3>
+                        <h3 class="text-lg font-semibold text-blue-700 mb-3 border-b pb-1">Visualization &amp; Analysis
+                        </h3>
                         <ul class="list-disc list-inside space-y-1.5 text-sm text-gray-700">
                             <li>VMD, PyMOL, UCSF Chimera, ChimeraX</li>
                             <li>Avogadro, Matplotlib, gnuplot, OriginLab</li>
@@ -933,7 +1029,8 @@
                                     onerror="this.onerror=null; this.src='https://placehold.co/600x400/e0e0e0/777?text=Image+Not+Found';">
                             </td>
                             <td>
-                                Membrane transport mechanisms: passive diffusion and active transport via transporter proteins
+                                Membrane transport mechanisms: passive diffusion and active transport via transporter
+                                proteins
                             </td>
                         </tr>
                         <tr class="hover:bg-gray-50">
@@ -1002,7 +1099,8 @@
                         </tr>
                         <tr class="hover:bg-gray-50">
                             <td>
-                                <img src="media/M1_M2_orientation.png" alt="Different GFP mutants adsorbing on silica surface"
+                                <img src="media/M1_M2_orientation.png"
+                                    alt="Different GFP mutants adsorbing on silica surface"
                                     onerror="this.onerror=null; this.src='https://placehold.co/600x400/e0e0e0/777?text=Image+Not+Found';">
                             </td>
                             <td>
@@ -1035,7 +1133,8 @@
         <section id="cv" class="tab-content hidden">
             <h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Curriculum Vitae</h2>
             <div class="text-center bg-white rounded-lg shadow-md p-8">
-                <p class="text-base md:text-lg text-gray-700 mb-6">Please email me to request my full academic CV, which contains more details on my education, experience, and achievements.</p>
+                <p class="text-base md:text-lg text-gray-700 mb-6">Please email me to request my full academic CV, which
+                    contains more details on my education, experience, and achievements.</p>
                 <a href="mailto:singhni8@msu.edu?subject=CV Request from Portfolio"
                     class="inline-block bg-slate-700 hover:bg-slate-800 text-white font-bold py-3 px-6 rounded-lg text-base md:text-lg transition duration-300 ease-in-out transform hover:-translate-y-1 shadow-md hover:shadow-lg">
                     Request CV via Email
@@ -1151,7 +1250,7 @@
                 const nextVideo = slides[current].querySelector('video');
                 if (nextVideo) {
                     nextVideo.currentTime = 0;
-                    nextVideo.play().catch(() => {});
+                    nextVideo.play().catch(() => { });
                 }
 
                 resetTimer();
