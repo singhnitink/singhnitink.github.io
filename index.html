@@ -25,21 +25,15 @@
         }
 
         .active-tab {
-            /* Highlight active tab with a border */
             border-bottom: 2px solid #3b82f6;
-            /* Tailwind blue-500 */
             color: #ffffff;
-            /* White text for active tab */
         }
 
         .tab-link {
-            /* Add padding for better click area */
             padding-bottom: 0.5rem;
-            /* pb-2 */
         }
 
         .tab-content {
-            /* Smooth transition for content visibility */
             transition: opacity 0.5s ease-in-out;
         }
 
@@ -47,66 +41,51 @@
             display: none;
         }
 
-        /* Add some hover effect to paper entries */
         .paper-entry:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* Custom scrollbar styling (optional, for WebKit browsers) */
         .nav-scroll::-webkit-scrollbar {
             height: 4px;
-            /* Height of the scrollbar */
         }
 
         .nav-scroll::-webkit-scrollbar-track {
             background: #4b5563;
-            /* bg-gray-700 */
             border-radius: 10px;
         }
 
         .nav-scroll::-webkit-scrollbar-thumb {
             background-color: #9ca3af;
-            /* bg-gray-400 */
             border-radius: 10px;
             border: 1px solid #4b5563;
-            /* bg-gray-700 */
         }
 
-        /* Style for the details/summary elements */
+        /* Details/Summary styling */
         details {
             margin-bottom: 1em;
             padding: 0.75em 1em;
-            /* Increased padding */
             border: 1px solid #d1d5db;
-            /* Tailwind gray-300 */
             border-radius: 8px;
             background-color: #f9fafb;
-            /* Tailwind gray-50 */
             transition: background-color 0.2s ease;
         }
 
         details[open] {
             background-color: #f3f4f6;
-            /* Tailwind gray-100 when open */
         }
 
         summary {
             font-weight: 600;
-            /* semibold */
             font-size: 1.05em;
             cursor: pointer;
             color: #1f2937;
-            /* Tailwind gray-800 */
             list-style: none;
-            /* Remove default marker */
             position: relative;
             padding-left: 1.5rem;
-            /* Space for custom marker */
         }
 
-        /* Custom marker for summary */
         summary::before {
             content: '+';
             position: absolute;
@@ -115,17 +94,14 @@
             transform: translateY(-50%);
             font-weight: bold;
             color: #3b82f6;
-            /* Tailwind blue-500 */
             transition: transform 0.2s ease;
         }
 
         details[open] summary::before {
             content: '−';
-            /* Minus sign when open */
             transform: translateY(-50%) rotate(180deg);
         }
 
-        /* Remove default arrow in WebKit browsers */
         summary::-webkit-details-marker {
             display: none;
         }
@@ -133,30 +109,136 @@
         details p,
         details ul {
             margin: 0.75em 0 0 0;
-            /* Increased top margin */
             padding-left: 1.5rem;
-            /* Indent content */
             color: #4b5563;
-            /* Tailwind gray-600 */
         }
 
         details ul {
             list-style: disc;
             padding-left: 2.5rem;
-            /* Further indent list items */
         }
 
         details a {
             color: #2563eb;
-            /* Tailwind blue-600 */
             text-decoration: none;
             font-weight: 500;
-            /* medium */
         }
 
         details a:hover {
             text-decoration: underline;
         }
+
+        /* ── Slideshow ── */
+        .slideshow {
+            position: relative;
+            width: 100%;
+            max-width: 520px;
+            aspect-ratio: 4 / 3;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #0f172a;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+        }
+
+        .slideshow-slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            z-index: 0;
+        }
+
+        .slideshow-slide.active {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .slideshow-slide img,
+        .slideshow-slide video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .slideshow-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px 16px;
+            background: linear-gradient(transparent, rgba(15, 23, 42, 0.85));
+            color: #e2e8f0;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .slideshow-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 3;
+        }
+
+        .slideshow-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.35);
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+            padding: 0;
+        }
+
+        .slideshow-dot:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        .slideshow-dot.active {
+            background: #3b82f6;
+            transform: scale(1.25);
+        }
+
+        /* Prev / Next arrows */
+        .slideshow-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 3;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(4px);
+            border: none;
+            color: #fff;
+            font-size: 1.4rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+            opacity: 0;
+        }
+
+        .slideshow:hover .slideshow-arrow {
+            opacity: 1;
+        }
+
+        .slideshow-arrow:hover {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .slideshow-arrow.prev { left: 8px; }
+        .slideshow-arrow.next { right: 8px; }
     </style>
 </head>
 
@@ -208,11 +290,39 @@
         <section id="about" class="tab-content active">
             <div
                 class="flex flex-col md:flex-row items-center gap-8 md:gap-12 bg-white p-6 md:p-8 rounded-lg shadow-md">
-                <div class="md:w-1/4 flex justify-center">
-                    <img src="myimage.jpeg" alt="Nitin Kumar Singh"
-                        class="rounded-full shadow-lg w-60 h-80 md:w-70 md:h-70 object-cover border-4 border-gray-900">
+                <!-- Research Slideshow -->
+                <div class="md:w-2/5 flex justify-center">
+                    <div class="slideshow" id="heroSlideshow">
+                        <div class="slideshow-slide active" data-type="image">
+                            <img src="media/membrane_transport.png" alt="Membrane Transport Mechanisms">
+                            <div class="slideshow-caption">Membrane transport: passive diffusion &amp; active transport</div>
+                        </div>
+                        <div class="slideshow-slide" data-type="image">
+                            <img src="media/TOC_12_image17_copy_1.png" alt="Membrane Structure and Dynamics in Zymomonas mobilis">
+                            <div class="slideshow-caption">Membrane structure &amp; dynamics in Zymomonas mobilis</div>
+                        </div>
+                        <div class="slideshow-slide" data-type="image">
+                            <img src="media/M1_M2_orientation.png" alt="GFP Mutants Adsorbing on Silica">
+                            <div class="slideshow-caption">GFP mutant orientation on silica surface</div>
+                        </div>
+                        <div class="slideshow-slide" data-type="image">
+                            <img src="media/patterns.png" alt="Lysine-Leucine Peptide Patterns">
+                            <div class="slideshow-caption">Charge-sequence patterns in lysine-leucine peptides</div>
+                        </div>
+                        <div class="slideshow-slide" data-type="video">
+                            <video src="media/membrane_dynamics.mp4" muted loop preload="metadata"></video>
+                            <div class="slideshow-caption">Small molecules interacting with cell membrane (video)</div>
+                        </div>
+                        <div class="slideshow-slide" data-type="video">
+                            <video src="media/Memb_protein.mp4" muted loop preload="metadata"></video>
+                            <div class="slideshow-caption">Plant protein &amp; thylakoid membrane MD simulation (video)</div>
+                        </div>
+                        <button class="slideshow-arrow prev" aria-label="Previous slide">&#8249;</button>
+                        <button class="slideshow-arrow next" aria-label="Next slide">&#8250;</button>
+                        <div class="slideshow-dots" id="slideshowDots"></div>
+                    </div>
                 </div>
-                <div class="md:w-3/4 text-center md:text-left">
+                <div class="md:w-3/5 text-center md:text-left">
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">About Me</h2>
 
                     <div class="space-y-4 text-left">
@@ -335,6 +445,24 @@
             <h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Publications</h2>
             <div class="space-y-6">
                 <div class="bg-white rounded-lg shadow-md p-5 md:p-6 paper-entry">
+                    <h3 class="text-lg md:text-xl font-semibold text-gray-800 mb-1">Evaluating the Transport Mechanism for
+                        Lignocellulosic Inhibitors in Zymomonas mobilis</h3>
+                    <p class="text-sm md:text-base text-gray-600 italic">Nitin Kumar Singh, and J. Vermaas.</p>
+                    <p class="text-sm md:text-base text-gray-700 mt-1">ACS Sustainable Chemistry &amp; Engineering
+                        (2026).</p>
+                    <a href="https://pubs.acs.org/ascecg/article/doi/10.1021/acssuschemeng.6c04782/" target="_blank"
+                        class="text-sm md:text-base text-blue-500 hover:text-blue-700 hover:underline mt-2 inline-block">View
+                        Paper</a>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-5 md:p-6 paper-entry">
+                    <h3 class="text-lg md:text-xl font-semibold text-gray-800 mb-1">The Nanoscale Impact of Cyclopropane
+                        Fatty Acids and Hopanoids on Alcohol Tolerance in Clostridium acetobutylicum and Zymomonas
+                        mobilis</h3>
+                    <p class="text-sm md:text-base text-gray-600 italic">Hrishikesh Belagali, Nitin Kumar Singh, and J.
+                        Vermaas.</p>
+                    <p class="text-sm md:text-base text-gray-700 mt-1">ChemRxiv (2026).</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-5 md:p-6 paper-entry">
                     <h3 class="text-lg md:text-xl font-semibold text-gray-800 mb-1">Quantifying Membrane Structure and
                         Dynamics during Bioproduct Production in Zymomonas mobilis by Molecular Simulation</h3>
                     <p class="text-sm md:text-base text-gray-600 italic">Nitin Kumar Singh, and J. Vermaas.</p>
@@ -343,12 +471,6 @@
                     <a href="https://doi.org/10.1021/acs.jpcb.5c06231" target="_blank"
                         class="text-sm md:text-base text-blue-500 hover:text-blue-700 hover:underline mt-2 inline-block">View
                         Paper</a>
-                </div>
-                <div class="bg-white rounded-lg shadow-md p-5 md:p-6 paper-entry">
-                    <h3 class="text-lg md:text-xl font-semibold text-gray-800 mb-1">Evaluating Transport Mechanisms for
-                        Lignocellulosic Inhibitors in Zymomonas mobilis</h3>
-                    <p class="text-sm md:text-base text-gray-600 italic">Nitin Kumar Singh, and J. Vermaas.</p>
-                    <p class="text-sm md:text-base text-gray-700 mt-1">ChemRxiv (2026).</p>
                 </div>
                 <div class="bg-white rounded-lg shadow-md p-5 md:p-6 paper-entry">
                     <h3 class="text-lg md:text-xl font-semibold text-gray-800 mb-1">Statistical analysis of the unique
@@ -485,7 +607,17 @@
                     <tbody class="text-gray-700 text-sm">
                         <tr class="hover:bg-gray-50">
                             <td class="w-full sm:w-auto">
-                                <img src="TOC_12_image17_copy_1.png"
+                                <img src="media/membrane_transport.png"
+                                    alt="Membrane transport mechanisms: passive diffusion and active transport"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/e0e0e0/777?text=Image+Not+Found';">
+                            </td>
+                            <td>
+                                Membrane transport mechanisms: passive diffusion and active transport via transporter proteins
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="w-full sm:w-auto">
+                                <img src="media/TOC_12_image17_copy_1.png"
                                     alt="TOC image for Quantifying Membrane Structure and Dynamics in Zymomonas mobilis"
                                     onerror="this.onerror=null; this.src='https://placehold.co/600x400/e0e0e0/777?text=Image+Not+Found';">
                             </td>
@@ -497,7 +629,7 @@
                         <tr class="hover:bg-gray-50">
                             <td class="w-full sm:w-auto">
                                 <video controls preload="metadata">
-                                    <source src="GFP1.mp4" type="video/mp4">
+                                    <source src="media/GFP1.mp4" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
                             </td>
@@ -508,7 +640,7 @@
                         <tr class="hover:bg-gray-50">
                             <td>
                                 <video controls preload="metadata">
-                                    <source src="GFP2.mp4" type="video/mp4">
+                                    <source src="media/GFP2.mp4" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
                             </td>
@@ -519,7 +651,7 @@
                         <tr class="hover:bg-gray-50">
                             <td>
                                 <video controls preload="metadata">
-                                    <source src="membrane_dynamics.mp4" type="video/mp4">
+                                    <source src="media/membrane_dynamics.mp4" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
                             </td>
@@ -530,7 +662,7 @@
                         <tr class="hover:bg-gray-50">
                             <td>
                                 <video controls preload="metadata">
-                                    <source src="Memb_protein.mp4" type="video/mp4">
+                                    <source src="media/Memb_protein.mp4" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
                             </td>
@@ -540,7 +672,7 @@
                         </tr>
                         <tr class="hover:bg-gray-50">
                             <td>
-                                <img src="patterns.png" alt="Different patterns of lysine-leucine peptide"
+                                <img src="media/patterns.png" alt="Different patterns of lysine-leucine peptide"
                                     onerror="this.onerror=null; this.src='https://placehold.co/600x400/e0e0e0/777?text=Image+Not+Found';">
                             </td>
                             <td>
@@ -549,7 +681,7 @@
                         </tr>
                         <tr class="hover:bg-gray-50">
                             <td>
-                                <img src="M1_M2_orientation.png" alt="Different GFP mutants adsorbing on silica surface"
+                                <img src="media/M1_M2_orientation.png" alt="Different GFP mutants adsorbing on silica surface"
                                     onerror="this.onerror=null; this.src='https://placehold.co/600x400/e0e0e0/777?text=Image+Not+Found';">
                             </td>
                             <td>
@@ -558,7 +690,7 @@
                         </tr>
                         <tr class="hover:bg-gray-50">
                             <td>
-                                <img src="hydrodispred.png" alt="The Hydrodispread algorithm"
+                                <img src="media/hydrodispred.png" alt="The Hydrodispread algorithm"
                                     onerror="this.onerror=null; this.src='https://placehold.co/600x400/e0e0e0/777?text=Image+Not+Found';">
                             </td>
                             <td>
@@ -567,7 +699,7 @@
                         </tr>
                         <tr class="hover:bg-gray-50">
                             <td>
-                                <img src="PSSA.png" alt="The Helixpred algorithm"
+                                <img src="media/PSSA.png" alt="The Helixpred algorithm"
                                     onerror="this.onerror=null; this.src='https://placehold.co/600x400/e0e0e0/777?text=Image+Not+Found';">
                             </td>
                             <td>
@@ -599,77 +731,137 @@
     </footer>
 
     <script>
+        /* ── Tab Navigation ── */
         const tabLinks = document.querySelectorAll('.tab-link');
         const tabContents = document.querySelectorAll('.tab-content');
 
-        // Function to handle tab switching (*** GA Tracking Logic Needs to be Added Here ***)
         function switchTab(tabName) {
-            // Remove active styles from all links and hide all content
             tabLinks.forEach(link => {
                 link.classList.remove('active-tab', 'text-white');
-                link.classList.add('text-gray-300'); // Reset to default color
+                link.classList.add('text-gray-300');
             });
             tabContents.forEach(content => {
                 content.classList.add('hidden');
-                content.style.opacity = 0; // Start hidden content as transparent
+                content.style.opacity = 0;
             });
 
-            // Find the clicked link and corresponding content
             const activeLink = document.querySelector(`.tab-link[data-tab="${tabName}"]`);
             const activeContent = document.getElementById(tabName);
 
-            // Apply active styles to the clicked link
             if (activeLink) {
                 activeLink.classList.add('active-tab', 'text-white');
                 activeLink.classList.remove('text-gray-300');
             }
 
-            // Show the corresponding content with a fade-in effect
             if (activeContent) {
                 activeContent.classList.remove('hidden');
-                // Use a timeout to allow the display property to change before starting opacity transition
-                setTimeout(() => {
-                    activeContent.style.opacity = 1;
-                }, 50); // Small delay
+                setTimeout(() => { activeContent.style.opacity = 1; }, 50);
             }
-            // *** GA Tracking Logic Missing Here ***
         }
 
-        // Add click event listeners to tab links (*** Needs Update for GA ***)
         tabLinks.forEach(link => {
             link.addEventListener('click', function (event) {
-                event.preventDefault(); // Prevent default anchor link behavior
+                event.preventDefault();
                 const tabName = this.getAttribute('data-tab');
                 switchTab(tabName);
-                // Update URL hash without jumping using replaceState for cleaner history
                 history.replaceState(null, null, `#${tabName}`);
             });
         });
 
-        // Check URL hash on page load to activate the correct tab (*** Needs Update for GA ***)
-        const currentHash = window.location.hash.substring(1); // Get hash without '#'
+        const currentHash = window.location.hash.substring(1);
         const validTabs = Array.from(tabLinks).map(link => link.getAttribute('data-tab'));
 
         if (currentHash && validTabs.includes(currentHash)) {
-            switchTab(currentHash); // Activate tab from URL hash
+            switchTab(currentHash);
         } else {
-            switchTab('about'); // Default to 'about' tab
-            // Set default hash only if none exists, avoids overwriting user navigation
+            switchTab('about');
             if (!window.location.hash) {
                 history.replaceState(null, null, '#about');
             }
         }
 
-        // Handle back/forward navigation using popstate (*** Needs Update for GA ***)
         window.addEventListener('popstate', function () {
             const hash = window.location.hash.substring(1);
             if (hash && validTabs.includes(hash)) {
                 switchTab(hash);
             } else {
-                // If hash is invalid or empty after popstate, default to 'about'
                 switchTab('about');
             }
         });
+
+        /* ── Hero Slideshow ── */
+        (function () {
+            const container = document.getElementById('heroSlideshow');
+            if (!container) return;
+
+            const slides = container.querySelectorAll('.slideshow-slide');
+            const dotsContainer = document.getElementById('slideshowDots');
+            const prevBtn = container.querySelector('.slideshow-arrow.prev');
+            const nextBtn = container.querySelector('.slideshow-arrow.next');
+            let current = 0;
+            let timer = null;
+            const INTERVAL = 5000;
+
+            // Build dots
+            slides.forEach((_, i) => {
+                const dot = document.createElement('button');
+                dot.classList.add('slideshow-dot');
+                if (i === 0) dot.classList.add('active');
+                dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+                dot.addEventListener('click', () => goTo(i));
+                dotsContainer.appendChild(dot);
+            });
+            const dots = dotsContainer.querySelectorAll('.slideshow-dot');
+
+            function goTo(index) {
+                // Pause any currently playing video
+                const currentVideo = slides[current].querySelector('video');
+                if (currentVideo) { currentVideo.pause(); }
+
+                slides[current].classList.remove('active');
+                dots[current].classList.remove('active');
+
+                current = (index + slides.length) % slides.length;
+
+                slides[current].classList.add('active');
+                dots[current].classList.add('active');
+
+                // Auto-play video slides
+                const nextVideo = slides[current].querySelector('video');
+                if (nextVideo) {
+                    nextVideo.currentTime = 0;
+                    nextVideo.play().catch(() => {});
+                }
+
+                resetTimer();
+            }
+
+            function next() { goTo(current + 1); }
+            function prev() { goTo(current - 1); }
+
+            function resetTimer() {
+                clearInterval(timer);
+                timer = setInterval(next, INTERVAL);
+            }
+
+            prevBtn.addEventListener('click', prev);
+            nextBtn.addEventListener('click', next);
+
+            // Pause auto-advance while a video is actively playing
+            slides.forEach(slide => {
+                const vid = slide.querySelector('video');
+                if (!vid) return;
+                vid.addEventListener('play', () => clearInterval(timer));
+                vid.addEventListener('pause', resetTimer);
+                vid.addEventListener('ended', () => { resetTimer(); next(); });
+            });
+
+            // Pause on hover
+            container.addEventListener('mouseenter', () => clearInterval(timer));
+            container.addEventListener('mouseleave', resetTimer);
+
+            resetTimer();
+        })();
     </script>
 </body>
 
