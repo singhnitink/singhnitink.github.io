@@ -498,8 +498,7 @@
                     </p>
                     <ul class="list-disc list-inside space-y-1 text-sm text-gray-600 pl-4">
                         <li><strong>De Novo Binder Design:</strong> Utilizing diffusion architectures (RFdiffusion) and
-                            inverse folding models (ProteinMPNN) to design mini-protein binders targeting therapeutic
-                            checkpoints like PD-L1.</li>
+                            inverse folding models (ProteinMPNN) to design mini-protein binders targeting the human Interleukin-7 Receptor alpha (IL-7R&alpha;) ectodomain.</li>
                         <li><strong>Automated Structural Docking:</strong> Building end-to-end Python pipelines to
                             bridge AI structures (AlphaFold3) with classical docking packages (AutoDock Vina) to
                             automate high-throughput drug screening workflows.</li>
@@ -576,8 +575,10 @@
                 </div>
                 <div class="bg-white rounded-lg shadow-md p-5 md:p-6 paper-entry">
                     <h3 class="text-lg md:text-xl font-semibold text-gray-800 mb-1">An unintended transformation of
-                        surfactant molecules into lamellar structures during freeze drying: Experiments and Simulation</h3>
-                    <p class="text-sm md:text-base text-gray-600 italic">A. Rasyotra, Nitin Kumar Singh, A. Buch, S. Surawar,
+                        surfactant molecules into lamellar structures during freeze drying: Experiments and Simulation
+                    </h3>
+                    <p class="text-sm md:text-base text-gray-600 italic">A. Rasyotra, Nitin Kumar Singh, A. Buch, S.
+                        Surawar,
                         P. Shah, M. Radhakrishna, and K. Jasuja.</p>
                     <p class="text-sm md:text-base text-gray-700 mt-1">Langmuir 41, 37 (2025): 25197–25206.</p>
                     <a href="https://doi.org/10.1021/acs.langmuir.5c02262" target="_blank"
@@ -585,10 +586,12 @@
                         Paper</a>
                 </div>
                 <div class="bg-white rounded-lg shadow-md p-5 md:p-6 paper-entry">
-                    <h3 class="text-lg md:text-xl font-semibold text-gray-800 mb-1">Molecular Insights into the Adsorption
+                    <h3 class="text-lg md:text-xl font-semibold text-gray-800 mb-1">Molecular Insights into the
+                        Adsorption
                         and Self Assembly of Charged Copolypeptides on Silica</h3>
                     <p class="text-sm md:text-base text-gray-600 italic">Nitin Kumar Singh, and M. Radhakrishna.</p>
-                    <p class="text-sm md:text-base text-gray-700 mt-1">Computational and Theoretical Chemistry 1254 (2025):
+                    <p class="text-sm md:text-base text-gray-700 mt-1">Computational and Theoretical Chemistry 1254
+                        (2025):
                         115479.</p>
                     <a href="https://doi.org/10.1016/j.comptc.2025.115479" target="_blank"
                         class="text-sm md:text-base text-blue-500 hover:text-blue-700 hover:underline mt-2 inline-block">View
@@ -670,40 +673,37 @@
                 <!-- Project 1 -->
                 <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-2">
-                        <h3 class="text-2xl font-bold text-gray-800">De Novo Mini Binder Design (RFdiffusion +
-                            ProteinMPNN)</h3>
+                        <h3 class="text-2xl font-bold text-gray-800">De Novo Binder Design for IL-7R&alpha; (CD127)</h3>
                         <a href="https://github.com/singhnitink/Binder_design" target="_blank"
                             class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md shadow-sm transition-colors">
                             View Repository
                         </a>
                     </div>
                     <p class="text-gray-700 mb-4 leading-relaxed">
-                        An end-to-end deep learning pipeline to generate de novo mini-protein binders against human
-                        PD-L1.
-                        By integrating generative diffusion models, inverse folding networks, and alignment-free folding
-                        prediction,
-                        the workflow designs high-specificity protein candidates targeting known structural hotspots.
+                        Computational pipelines for designing de novo protein binders targeting the human Interleukin-7 Receptor alpha (IL-7R&alpha;) ectodomain, mimicking the benchmark target in <em>Watson et al. 2023 (Nature)</em>. Consensuses are verified via two distinct workflows using the consolidated Conda environment <code>proteindesigntutorial</code>.
                     </p>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6 text-sm">
                         <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
-                            <h4 class="font-semibold text-gray-800 mb-2">Deep Learning Frameworks Used:</h4>
-                            <ul class="list-disc list-inside space-y-1 text-gray-600">
-                                <li><strong>RFdiffusion</strong>: Generative diffusion modeling for structural backbone
-                                    generation</li>
-                                <li><strong>ProteinMPNN</strong>: Neural network-based inverse folding for sequence
-                                    design</li>
-                                <li><strong>ESMFold</strong>: Large language model (LLM) for alignment-free structure
-                                    validation</li>
+                            <h4 class="font-semibold text-gray-800 mb-2">1. Hotspot-Guided Design (il7ra_binder_design.ipynb)</h4>
+                            <p class="text-gray-600 mb-2 leading-relaxed">
+                                Targets a known pocket using pre-defined hotspot residues on the receptor structure (PDB: 3DI3 Chain B).
+                            </p>
+                            <ul class="list-disc list-inside space-y-1 text-gray-500 text-xs">
+                                <li><strong>Target Prep</strong>: Isolating Chain B and setting guide hotspots (B58, B80, B139)</li>
+                                <li><strong>Backbone &amp; Sequence</strong>: RFdiffusion scaffolding followed by receptor-fixed ProteinMPNN</li>
+                                <li><strong>Validation &amp; Scoring</strong>: Structural prediction with Boltz-2 (ipTM, pLDDT) and PyRosetta interface relaxation</li>
                             </ul>
                         </div>
                         <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
-                            <h4 class="font-semibold text-gray-800 mb-2">Key Assessment Metrics:</h4>
-                            <ul class="list-disc list-inside space-y-1 text-gray-600">
-                                <li><strong>pLDDT &gt; 80</strong>: Confidence filter for structural fold stability</li>
-                                <li><strong>Cα RMSD &lt; 2.0 Å</strong>: Fit metric comparing predicted structures
-                                    against backbones</li>
-                                <li><strong>Exploratory MD</strong>: Rotamer and contact persistence in OpenMM</li>
+                            <h4 class="font-semibold text-gray-800 mb-2">2. Blind Design &amp; Pocket Detection (blind_binder_design.ipynb)</h4>
+                            <p class="text-gray-600 mb-2 leading-relaxed">
+                                Scans the ectodomain surface blindly without hotspots to automatically map preferred binder landing sites.
+                            </p>
+                            <ul class="list-disc list-inside space-y-1 text-gray-500 text-xs">
+                                <li><strong>Geometric Pocket Finder</strong>: Custom concavity/burial coordination and SASA metric scanning</li>
+                                <li><strong>Epitope Validation</strong>: Cross-validating consensus pockets with experimental anti-IL-7R&alpha; Fab (PDB: 6P50)</li>
+                                <li><strong>Negative Control</strong>: Specificity checks against Ubiquitin (PDB: 1UBQ) decoy target</li>
                             </ul>
                         </div>
                     </div>
@@ -711,7 +711,7 @@
                     <details class="mt-4 border border-gray-200 rounded-lg bg-slate-50 transition-all overflow-hidden">
                         <summary
                             class="text-sm font-semibold text-blue-600 hover:text-blue-800 cursor-pointer p-4 bg-gray-50 select-none">
-                            Show De Novo Design Workflow Diagram
+                            Show Hotspot-Guided Workflow Diagram
                         </summary>
                         <div class="p-6 bg-white border-t border-gray-100 flex justify-center overflow-x-auto">
                             <!-- Minimalist Academic Flowchart -->
@@ -764,8 +764,8 @@
                                 <!-- Column 1: Input -->
                                 <rect x="10" y="35" width="120" height="55" class="input-style" />
                                 <text x="70" y="52" class="node-text node-bold" text-anchor="middle">Input Target</text>
-                                <text x="70" y="67" class="sub-text" text-anchor="middle">PD-L1 PDB (6VPT)</text>
-                                <text x="70" y="78" class="sub-text" text-anchor="middle">+ Defined Hotspots</text>
+                                <text x="70" y="67" class="sub-text" text-anchor="middle">IL-7R&alpha; (PDB 3DI3)</text>
+                                <text x="70" y="78" class="sub-text" text-anchor="middle">Hotspots (B58, B80, B139)</text>
 
                                 <!-- Arrow 1 -->
                                 <path d="M 130 62 L 164 62" class="arrow-line" marker-end="url(#arrow)" />
@@ -774,7 +774,7 @@
                                 <rect x="170" y="35" width="120" height="55" class="box-style" />
                                 <text x="230" y="52" class="node-text node-bold" text-anchor="middle">RFdiffusion</text>
                                 <text x="230" y="67" class="sub-text" text-anchor="middle">Backbone Generation</text>
-                                <text x="230" y="78" class="sub-text" text-anchor="middle">De Novo Scaffolding</text>
+                                <text x="230" y="78" class="sub-text" text-anchor="middle">Hotspot-Guided</text>
 
                                 <!-- Arrow 2 -->
                                 <path d="M 290 62 L 324 62" class="arrow-line" marker-end="url(#arrow)" />
@@ -783,18 +783,16 @@
                                 <rect x="330" y="35" width="120" height="55" class="box-style" />
                                 <text x="390" y="52" class="node-text node-bold" text-anchor="middle">ProteinMPNN</text>
                                 <text x="390" y="67" class="sub-text" text-anchor="middle">Sequence Design</text>
-                                <text x="390" y="78" class="sub-text" text-anchor="middle">Inverse Folding Model</text>
+                                <text x="390" y="78" class="sub-text" text-anchor="middle">Receptor Fixed</text>
 
                                 <!-- Arrow 3 -->
                                 <path d="M 450 62 L 484 62" class="arrow-line" marker-end="url(#arrow)" />
 
                                 <!-- Column 4: Validation -->
                                 <rect x="490" y="35" width="150" height="55" class="box-style" />
-                                <text x="565" y="52" class="node-text node-bold" text-anchor="middle">ESMFold
-                                    Validation</text>
-                                <text x="565" y="67" class="sub-text" text-anchor="middle">Recapitulation Filter</text>
-                                <text x="565" y="78" class="sub-text" text-anchor="middle">RMSD &lt; 2.0Å | pLDDT &gt;
-                                    80</text>
+                                <text x="565" y="52" class="node-text node-bold" text-anchor="middle">Boltz-2 / PyRosetta</text>
+                                <text x="565" y="67" class="sub-text" text-anchor="middle">Complex Structure &amp; relaxation</text>
+                                <text x="565" y="78" class="sub-text" text-anchor="middle">ipTM &gt; 0.75 | pLDDT &gt; 80</text>
                             </svg>
                         </div>
                     </details>
@@ -803,42 +801,44 @@
                 <!-- Project 2 -->
                 <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-2">
-                        <h3 class="text-2xl font-bold text-gray-800">AlphaFold3 Structural Docking Pipeline (AutoDock
-                            Vina)</h3>
+                        <h3 class="text-2xl font-bold text-gray-800">Automating Binding Affinity Calculations from
+                            AlphaFold3 Complexes (docking1)</h3>
                         <a href="https://github.com/singhnitink/docking1" target="_blank"
                             class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md shadow-sm transition-colors">
                             View Repository
                         </a>
                     </div>
                     <p class="text-gray-700 mb-4 leading-relaxed">
-                        A robust, automated pipeline to compute thermodynamic binding affinities of protein-ligand
-                        complexes predicted by AlphaFold3.
-                        The system parses AlphaFold3-formatted JSON structures, reconstructs coordinate files,
-                        parameterizes receptor/ligand targets,
-                        automatically sets optimal search spaces, and schedules parallel docking simulations.
+                        I’ve developed a Python script that provides a streamlined pipeline to bridge the gap between
+                        AlphaFold3 predictions and molecular docking analysis.
+                        While AlphaFold3 generates high-quality protein–ligand complex structures, it does not offer
+                        binding affinity values. This becomes a key limitation when working with multiple ligands and
+                        needing to compare their binding strengths — a critical step in structure-based drug discovery.
+                    </p>
+                    <p class="text-gray-700 mb-4 leading-relaxed">
+                        To address this, I built <code>docking.py</code> — a Python-based pipeline that:
+                    </p>
+                    <ul class="list-disc list-inside space-y-1 mb-4 text-gray-700 pl-4">
+                        <li>Takes the AlphaFold3 output (a <strong>.cif file</strong> of the protein + ligand complex)
+                        </li>
+                        <li>Automatically prepares the system (adds hydrogens, generates grid boxes, etc.)</li>
+                        <li>Runs <strong>AutoDock Vina</strong> behind the scenes</li>
+                        <li>Outputs binding affinity scores with minimal user intervention</li>
+                    </ul>
+                    <p class="text-gray-700 mb-4 leading-relaxed">
+                        This enables researchers to rapidly evaluate docking poses and binding affinities across
+                        multiple complexes — directly from AlphaFold3 output.
                     </p>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6 text-sm">
-                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
-                            <h4 class="font-semibold text-gray-800 mb-2">Automated Preparation:</h4>
-                            <ul class="list-disc list-inside space-y-1 text-gray-600">
-                                <li><strong>OpenBabel Integration</strong>: Reconstructs 3D coordinates from SMILES
-                                    codes</li>
-                                <li><strong>Polar Hydrogen Addition</strong>: Sets correct protonation states for
-                                    receptor &amp; ligand</li>
-                                <li><strong>Autogrid Alignment</strong>: Dynamically bounds the search grid box around
-                                    the active site</li>
-                            </ul>
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4 text-sm bg-gray-50 p-4 rounded-lg border border-gray-100">
+                        <div>
+                            <span class="font-semibold text-gray-800">Input:</span> AlphaFold3 output <code>.cif</code>
+                            file
                         </div>
-                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
-                            <h4 class="font-semibold text-gray-800 mb-2">Calculations &amp; Workflows:</h4>
-                            <ul class="list-disc list-inside space-y-1 text-gray-600">
-                                <li><strong>AutoDock Vina Engine</strong>: Computes binding energy outputs in kcal/mol
-                                </li>
-                                <li><strong>Pose Sorting</strong>: Ranks candidate conformations by affinity scores</li>
-                                <li><strong>Reproducible Environment</strong>: Self-contained setup shell script for
-                                    cloud architectures</li>
-                            </ul>
+                        <div>
+                            <span class="font-semibold text-gray-800">Output:</span> Predicted binding energy from Vina
+                            (kcal/mol)
                         </div>
                     </div>
 
@@ -857,12 +857,12 @@
                                             stroke-linecap="round" stroke-linejoin="round" />
                                     </marker>
                                 </defs>
-                                <!-- Column 1: AF3 JSON -->
+                                <!-- Column 1: AF3 CIF -->
                                 <rect x="10" y="35" width="120" height="55" class="input-style" />
-                                <text x="70" y="52" class="node-text node-bold" text-anchor="middle">AF3 Input
-                                    JSON</text>
-                                <text x="70" y="67" class="sub-text" text-anchor="middle">Receptor Sequence</text>
-                                <text x="70" y="78" class="sub-text" text-anchor="middle">+ Ligand SMILES</text>
+                                <text x="70" y="52" class="node-text node-bold" text-anchor="middle">AlphaFold3
+                                    .cif</text>
+                                <text x="70" y="67" class="sub-text" text-anchor="middle">Complex Coordinates</text>
+                                <text x="70" y="78" class="sub-text" text-anchor="middle">Protein + Ligand</text>
 
                                 <!-- Arrow 1 -->
                                 <path d="M 130 62 L 164 62" class="arrow-line" marker-end="url(#arrow2)" />
@@ -871,8 +871,8 @@
                                 <rect x="180" y="35" width="120" height="55" class="box-style" />
                                 <text x="240" y="52" class="node-text node-bold" text-anchor="middle">OpenBabel /
                                     RDKit</text>
-                                <text x="240" y="67" class="sub-text" text-anchor="middle">3D Coord Generation</text>
-                                <text x="240" y="78" class="sub-text" text-anchor="middle">Polar H+ Addition</text>
+                                <text x="240" y="67" class="sub-text" text-anchor="middle">Ligand Extraction</text>
+                                <text x="240" y="78" class="sub-text" text-anchor="middle">Polar H+ Preparation</text>
 
                                 <!-- Arrow 2 -->
                                 <path d="M 300 62 L 334 62" class="arrow-line" marker-end="url(#arrow2)" />
@@ -881,8 +881,8 @@
                                 <rect x="350" y="35" width="120" height="55" class="box-style" />
                                 <text x="410" y="52" class="node-text node-bold" text-anchor="middle">Autogrid
                                     Dynamic</text>
-                                <text x="410" y="67" class="sub-text" text-anchor="middle">Grid Box Definition</text>
-                                <text x="410" y="78" class="sub-text" text-anchor="middle">Binding Site Center</text>
+                                <text x="410" y="67" class="sub-text" text-anchor="middle">Active Site Alignment</text>
+                                <text x="410" y="78" class="sub-text" text-anchor="middle">Search Box Generation</text>
 
                                 <!-- Arrow 3 -->
                                 <path d="M 470 62 L 504 62" class="arrow-line" marker-end="url(#arrow2)" />
@@ -891,8 +891,8 @@
                                 <rect x="520" y="35" width="130" height="55" class="box-style" />
                                 <text x="585" y="52" class="node-text node-bold" text-anchor="middle">AutoDock
                                     Vina</text>
-                                <text x="585" y="67" class="sub-text" text-anchor="middle">Conformation Search</text>
-                                <text x="585" y="78" class="sub-text" text-anchor="middle">Affinity Scoring</text>
+                                <text x="585" y="67" class="sub-text" text-anchor="middle">Conformation Docking</text>
+                                <text x="585" y="78" class="sub-text" text-anchor="middle">Binding Energy Output</text>
                             </svg>
                         </div>
                     </details>
@@ -903,10 +903,16 @@
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-2">
                         <h3 class="text-2xl font-bold text-gray-800">HydroDisPred (Predictive Model for Protein
                             Disorder)</h3>
-                        <a href="https://github.com/singhnitink/IDP_algorithm" target="_blank"
-                            class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md shadow-sm transition-colors">
-                            View Repository
-                        </a>
+                        <div class="flex flex-wrap gap-2">
+                            <a href="https://singhnitink.github.io/hydrodispred.html" target="_blank"
+                                class="inline-flex items-center px-4 py-2 bg-slate-600 hover:bg-slate-700 text-white text-sm font-medium rounded-md shadow-sm transition-colors">
+                                View Live Tool
+                            </a>
+                            <a href="https://github.com/singhnitink/IDP_algorithm" target="_blank"
+                                class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md shadow-sm transition-colors">
+                                View Repository
+                            </a>
+                        </div>
                     </div>
                     <p class="text-gray-700 mb-4 leading-relaxed">
                         A Python-based predictive modeling tool to identify Intrinsically Disordered Regions (IDRs) in
