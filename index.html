@@ -814,47 +814,98 @@
         <section id="skills" class="tab-content hidden">
             <h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Technical Skills</h2>
             <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Programming -->
                     <div>
-                        <h3 class="text-lg md:text-xl font-semibold text-blue-700 mb-3 border-b pb-1">Simulation &
-                            Modeling</h3>
-                        <ul class="list-disc list-inside space-y-1.5 text-sm md:text-base text-gray-700">
+                        <h3 class="text-lg font-semibold text-blue-700 mb-3 border-b pb-1">Programming</h3>
+                        <ul class="list-disc list-inside space-y-1.5 text-sm text-gray-700">
+                            <li>Python, Bash, FORTRAN, Tcl, MATLAB</li>
+                        </ul>
+                    </div>
+
+                    <!-- AI & Protein Engineering -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-blue-700 mb-3 border-b pb-1">AI &amp; Protein Engineering</h3>
+                        <ul class="list-disc list-inside space-y-1.5 text-sm text-gray-700">
+                            <li>Fine-Tuning Protein Language Models</li>
+                            <li>AlphaFold, Rosetta, RosettaFold</li>
+                            <li>RFdiffusion, ProteinMPNN, Boltz-2</li>
+                        </ul>
+                    </div>
+
+                    <!-- Containerization & DevOps -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-blue-700 mb-3 border-b pb-1">Containerization &amp; DevOps</h3>
+                        <ul class="list-disc list-inside space-y-1.5 text-sm text-gray-700">
+                            <li>Docker, Singularity / Apptainer</li>
+                            <li>Git Version Control</li>
+                        </ul>
+                    </div>
+
+                    <!-- Cheminformatics & Data Science -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-blue-700 mb-3 border-b pb-1">Cheminformatics &amp; Data Science</h3>
+                        <ul class="list-disc list-inside space-y-1.5 text-sm text-gray-700">
+                            <li>RDKit, Open Babel</li>
+                            <li>Pandas, NumPy</li>
+                            <li>Scikit-learn, TensorFlow, PyTorch</li>
+                        </ul>
+                    </div>
+
+                    <!-- Molecular Modeling & Docking -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-blue-700 mb-3 border-b pb-1">Molecular Modeling &amp; Simulation</h3>
+                        <ul class="list-disc list-inside space-y-1.5 text-sm text-gray-700">
                             <li>GROMACS, AMBER, NAMD, LAMMPS</li>
-                            <li>Gaussian, GAMESS</li>
-                            <li>Packmol, AutoDock Vina</li>
-                            <li>Open Babel, HADDOCK</li>
-                            <li>AlphaFold, RosettaFold</li>
+                            <li>OpenMM, AutoDock Vina</li>
+                            <li>HADDOCK, Packmol</li>
                         </ul>
                     </div>
+
+                    <!-- Quantum Chemistry -->
                     <div>
-                        <h3 class="text-lg md:text-xl font-semibold text-blue-700 mb-3 border-b pb-1">Programming &
-                            Scripting</h3>
-                        <ul class="list-disc list-inside space-y-1.5 text-sm md:text-base text-gray-700">
-                            <li>Python (Scikit-learn, TensorFlow, RDKit)</li>
-                            <li>Bash, Batch scripting</li>
-                            <li>FORTRAN, Tcl scripting</li>
-                            <li>HTML, PHP</li>
-                            <li>MATLAB</li>
+                        <h3 class="text-lg font-semibold text-blue-700 mb-3 border-b pb-1">Quantum Chemistry</h3>
+                        <ul class="list-disc list-inside space-y-1.5 text-sm text-gray-700">
+                            <li>Gaussian, GAMESS, ORCA</li>
                         </ul>
                     </div>
+
+                    <!-- Free Energy & Enhanced Sampling -->
                     <div>
-                        <h3 class="text-lg md:text-xl font-semibold text-blue-700 mb-3 border-b pb-1">HPC &
-                            Visualization</h3>
-                        <ul class="list-disc list-inside space-y-1.5 text-sm md:text-base text-gray-700">
-                            <li>Linux Clusters (SLURM, PBS)</li>
-                            <li>VMD, UCSF Chimera, PyMOL</li>
-                            <li>Avogadro, Gnuplot, Grace</li>
-                            <li>Matplotlib</li>
-                            <li>Originlab, Graphpad Prism</li>
+                        <h3 class="text-lg font-semibold text-blue-700 mb-3 border-b pb-1">Free Energy &amp; Enhanced Sampling</h3>
+                        <ul class="list-disc list-inside space-y-1.5 text-sm text-gray-700">
+                            <li>Free Energy Perturbation (FEP)</li>
+                            <li>Umbrella Sampling, Metadynamics</li>
+                            <li>Replica Exchange (REMD/REUS)</li>
+                            <li>MM/PBSA, MM/GBSA</li>
                         </ul>
                     </div>
-                    <div class="sm:col-span-1">
-                        <h3 class="text-lg md:text-xl font-semibold text-blue-700 mb-3 border-b pb-1">Biotechnology Lab
-                            Skills</h3>
-                        <ul class="list-disc list-inside space-y-1.5 text-sm md:text-base text-gray-700">
+
+                    <!-- High-Performance Computing -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-blue-700 mb-3 border-b pb-1">High-Performance Computing</h3>
+                        <ul class="list-disc list-inside space-y-1.5 text-sm text-gray-700">
+                            <li>Linux / Unix Administration</li>
+                            <li>SLURM, PBS Schedulers</li>
+                            <li>MPI Parallel Computing</li>
+                        </ul>
+                    </div>
+
+                    <!-- Visualization & Analysis -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-blue-700 mb-3 border-b pb-1">Visualization &amp; Analysis</h3>
+                        <ul class="list-disc list-inside space-y-1.5 text-sm text-gray-700">
+                            <li>VMD, PyMOL, UCSF Chimera, ChimeraX</li>
+                            <li>Avogadro, Matplotlib, gnuplot, OriginLab</li>
+                        </ul>
+                    </div>
+
+                    <!-- Experimental Techniques -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-blue-700 mb-3 border-b pb-1">Experimental Techniques</h3>
+                        <ul class="list-disc list-inside space-y-1.5 text-sm text-gray-700">
                             <li>Gel Electrophoresis, PCR</li>
-                            <li>Spectroscopy & Spectrophotometry</li>
-                            <li>Cell Culture</li>
+                            <li>Spectroscopy, Cell Culture</li>
                         </ul>
                     </div>
                 </div>
